@@ -21,12 +21,15 @@ import utilities.Date;
 import utilities.InvoiceCode;
 import utilities.Table;
 import java.util.List;
+import javax.swing.JOptionPane;
+import views.MainFrm;
 
 /**
  *
  * @author hamdan
  */
 public class SellController {
+    private final MainFrm frame;
     private final TransactionImp tImp;
     private final TransDetailImp tdImp;
     private final InvoiceImp iImp;
@@ -34,13 +37,14 @@ public class SellController {
     private final Table table;
     private List<Med> lm;
     
-    public SellController(){
-        tImp = (TransactionImp) new TransactionDao();
-        tdImp = (TransDetailImp) new TransDetailDao();
-        iImp = (InvoiceImp) new InvoiceDao();
-        mImp = (MedImp) new MedDao();
+    public SellController(MainFrm frame){
+        this.frame = frame;
+        tImp = new TransactionDao();
+        tdImp = new TransDetailDao();
+        iImp = new InvoiceDao();
+        mImp = new MedDao();
         
-        table = new Table(frame.getTransactionTable());
+        table = new Table(frame.getSell_table());
         table.setColumn(new String[]{"ID Obat", "Nama Obat", "Harga", "Qty", "Total"});
         table.setColumnWidth(578, 10, 55, 15, 5, 15);
         table.textCenter(0);
@@ -53,8 +57,8 @@ public class SellController {
     public void saveTransaction(){
         Transaction t = new Transaction();
         t.setDate(Date.now());
-        t.setTotal(Integer.parseInt(frame.gettTotal().getText()));
-        t.setTransactionCode(InvoiceCode.generate("PM", "transaction"));
+        t.setTotal(Integer.parseInt(frame.getSell_tTotal().getText()));
+        t.setTransactionCode(InvoiceCode.generate("PJ", "transaction"));
 
         tImp.insert(t);
         
@@ -79,18 +83,20 @@ public class SellController {
         i.setSeq(InvoiceCode.getSequenceNum("transaction"));
         
         iImp.insert(i, "transaction");
+        
+        JOptionPane.showMessageDialog(null, "Data telah tersimpan", "Pembayaran berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void reset(){
-        frame.gettMedName().setSelectedItem("");
-        frame.gettQty().setText("");
-        frame.gettTotal().setText("");
+        frame.getSell_tName().setSelectedItem("");
+        frame.getSell_tQty().setText("");
+        frame.getSell_tTotal().setText("");
         
         table.clearRow();
     }
     
     public void clearInput(){
-        frame.gettQty().setText("");
+        frame.getSell_tQty().setText("");
     }
     
     public void fillCombo(){
@@ -98,13 +104,13 @@ public class SellController {
         lm = tImp.getMed();
         
         lm.forEach(lm1 -> {
-            frame.gettMedName().addItem(lm1.getName());
+            frame.getSell_tName().addItem(lm1.getName());
         });
         
     }
     
     public void addRow(){
-        lm = tImp.getMedDetail((String) frame.gettMedName().getSelectedItem());
+        lm = tImp.getMedDetail((String) frame.getSell_tName().getSelectedItem());
         
         String[] data = new String[5];
         
@@ -112,7 +118,7 @@ public class SellController {
             data[0] = Integer.toString(lm1.getId());
             data[1] = lm1.getName();
             data[2] = Integer.toString(lm1.getPrice());
-            data[3] = frame.gettQty().getText();
+            data[3] = frame.getSell_tQty().getText();
             data[4] = Integer.toString(lm1.getPrice() * Integer.parseInt(data[3]));
         });
         
@@ -120,7 +126,7 @@ public class SellController {
     }
     
     public void deleteRow(){
-        table.removeRow(frame.getTransactionTable().getSelectedRow());
+        table.removeRow(frame.getSell_table().getSelectedRow());
     }
     
     public void calculateTotal(){
@@ -131,6 +137,6 @@ public class SellController {
             total += amount;
         }
         
-        frame.gettTotal().setText(Integer.toString(total));
+        frame.getSell_tTotal().setText(Integer.toString(total));
     }
 }

@@ -21,6 +21,7 @@ import utilities.Date;
 import utilities.InvoiceCode;
 import utilities.Table;
 import java.util.List;
+import javax.swing.JOptionPane;
 import views.MainFrm;
 
 /**
@@ -43,7 +44,7 @@ public class BuyController {
         iImp = (InvoiceImp) new InvoiceDao();
         mImp = (MedImp) new MedDao();
         
-        table = new Table(frame.getPurchaseTable());
+        table = new Table(frame.getBuy_table());
         table.setColumn(new String[]{"ID Obat", "Nama Obat", "Harga", "Qty", "Total"});
         table.setColumnWidth(578, 10, 55, 15, 5, 15);
         table.textCenter(0);
@@ -56,7 +57,7 @@ public class BuyController {
     public void savePurchase(){
         Purchase t = new Purchase();
         t.setDate(Date.now());
-        t.setTotal(Integer.parseInt(frame.gettTotal().getText()));
+        t.setTotal(Integer.parseInt(frame.getBuy_tTotal().getText()));
         t.setPurchaseCode(InvoiceCode.generate("PM", "purchase"));
 
         pImp.insert(t);
@@ -84,18 +85,20 @@ public class BuyController {
         i.setSeq(InvoiceCode.getSequenceNum("purchase"));
         
         iImp.insert(i, "purchase");
+        
+        JOptionPane.showMessageDialog(null, "Data telah tersimpan", "Pembayaran berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void reset(){
-        frame.gettMedName().setSelectedItem("");
-        frame.gettQty().setText("");
-        frame.gettTotal().setText("");
+        frame.getBuy_tName().setSelectedItem("");
+        frame.getBuy_tQty().setText("");
+        frame.getBuy_tTotal().setText("");
         
         table.clearRow();
     }
     
     public void clearInput(){
-        frame.gettQty().setText("");
+        frame.getBuy_tQty().setText("");
     }
     
     public void fillCombo(){
@@ -103,13 +106,13 @@ public class BuyController {
         lm = pImp.getMed();
         
         lm.forEach(lm1 -> {
-            frame.gettMedName().addItem(lm1.getName());
+            frame.getBuy_tName().addItem(lm1.getName());
         });
         
     }
     
     public void addRow(){
-        lm = pImp.getMedDetail((String) frame.gettMedName().getSelectedItem());
+        lm = pImp.getMedDetail((String) frame.getBuy_tName().getSelectedItem());
         
         String[] data = new String[5];
         
@@ -117,7 +120,7 @@ public class BuyController {
             data[0] = Integer.toString(lm1.getId());
             data[1] = lm1.getName();
             data[2] = Integer.toString(lm1.getPrice());
-            data[3] = frame.gettQty().getText();
+            data[3] = frame.getBuy_tQty().getText();
             data[4] = Integer.toString(lm1.getPrice() * Integer.parseInt(data[3]));
         });
         
@@ -125,7 +128,7 @@ public class BuyController {
     }
     
     public void deleteRow(){
-        table.removeRow(frame.getPurchaseTable().getSelectedRow());
+        table.removeRow(frame.getBuy_table().getSelectedRow());
     }
     
     public void calculateTotal(){
@@ -136,6 +139,6 @@ public class BuyController {
             total += amount;
         }
         
-        frame.gettTotal().setText(Integer.toString(total));
+        frame.getBuy_tTotal().setText(Integer.toString(total));
     }
 }
