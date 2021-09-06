@@ -34,7 +34,7 @@ public class LoginController {
         list = loginImp.getInfo(username, username);
         
         if(list.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Username salah!", "Login gagal", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Username Salah!", "Login gagal", JOptionPane.WARNING_MESSAGE);
             return;
         }
         

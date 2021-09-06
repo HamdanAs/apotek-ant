@@ -15,4 +15,7 @@ public interface ReportImp {
     public List<String> loadDateSell();
     public List<String> loadMonthSell();
     public List<String> loadYearSell();
+    public List<String> loadDateBuy();
+    public List<String> loadMonthBuy();
+    public List<String> loadYearBuy();
 }

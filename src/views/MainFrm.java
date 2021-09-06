@@ -7,6 +7,7 @@ package views;
 
 import controllers.BuyController;
 import controllers.MedController;
+import controllers.ReportController;
 import controllers.SellController;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -30,6 +31,7 @@ public class MainFrm extends javax.swing.JFrame {
     private final MedController medController;
     private final SellController sellController;
     private final BuyController buyController;
+    private final ReportController reportController;
     
     public MainFrm() {
         initComponents();
@@ -42,6 +44,14 @@ public class MainFrm extends javax.swing.JFrame {
         
         buyController = new BuyController(this);
         buyController.fillCombo();
+        
+        reportController = new ReportController(this);
+        reportController.setSellDate();
+        reportController.setSellMonth();
+        reportController.setSellYear();
+        reportController.setBuyDate();
+        reportController.setBuyMonth();
+        reportController.setBuyYear();
         
         lblStatus.setText("Beranda");
         changePane(homePane);
@@ -155,6 +165,30 @@ public class MainFrm extends javax.swing.JFrame {
     public JTable getBuy_table() {
         return buy_table;
     }
+
+    public JComboBox<String> getReport_SellDate() {
+        return report_SellDate;
+    }
+
+    public JComboBox<String> getReport_SellMonth() {
+        return report_SellMonth;
+    }
+
+    public JComboBox<String> getReport_SellYear() {
+        return report_SellYear;
+    }
+
+    public JComboBox<String> getReport_BuyDate() {
+        return report_BuyDate;
+    }
+
+    public JComboBox<String> getReport_BuyMonth() {
+        return report_BuyMonth;
+    }
+
+    public JComboBox<String> getReport_BuyYear() {
+        return report_BuyYear;
+    }
     
     
     
@@ -245,7 +279,32 @@ public class MainFrm extends javax.swing.JFrame {
         buy_btnPay = new javax.swing.JPanel();
         label1 = new javax.swing.JLabel();
         reportPane = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        report_SellDate = new javax.swing.JComboBox<>();
+        report_btnMakeDailySell = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        report_SellMonth = new javax.swing.JComboBox<>();
+        report_btnMakeMonthSell = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        report_SellYear = new javax.swing.JComboBox<>();
+        report_btnMakeYearSell = new javax.swing.JPanel();
+        jLabel34 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        report_BuyDate = new javax.swing.JComboBox<>();
+        report_btnMakeDailyBuy = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        report_BuyMonth = new javax.swing.JComboBox<>();
+        report_btnMakeMonthBuy = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        report_BuyYear = new javax.swing.JComboBox<>();
+        report_btnMakeYearBuy = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1212,21 +1271,216 @@ public class MainFrm extends javax.swing.JFrame {
         reportPane.setBackground(new java.awt.Color(52, 91, 99));
         reportPane.setForeground(new java.awt.Color(212, 236, 221));
 
+        jLabel5.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel5.setText("Laporan Penjualan Bulanan");
+
+        report_SellDate.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_SellDate.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_btnMakeDailySell.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeDailySell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeDailySell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMakeDailySellMouseClicked(evt);
+            }
+        });
+        report_btnMakeDailySell.setLayout(new java.awt.BorderLayout());
+
+        jLabel10.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Buat Laporan");
+        report_btnMakeDailySell.add(jLabel10, java.awt.BorderLayout.CENTER);
+
+        jLabel12.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel12.setText("Laporan Pembelian Harian");
+
+        report_SellMonth.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_SellMonth.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_btnMakeMonthSell.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeMonthSell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeMonthSell.setLayout(new java.awt.BorderLayout());
+
+        jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Buat Laporan");
+        report_btnMakeMonthSell.add(jLabel13, java.awt.BorderLayout.CENTER);
+
+        jLabel33.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel33.setText("Laporan Penjualan Tahunan");
+
+        report_SellYear.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_SellYear.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_btnMakeYearSell.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeYearSell.setLayout(new java.awt.BorderLayout());
+
+        jLabel34.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Buat Laporan");
+        report_btnMakeYearSell.add(jLabel34, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setBackground(new java.awt.Color(17, 32, 49));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBackground(new java.awt.Color(17, 32, 49));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+
+        jLabel35.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel35.setText("Laporan Penjualan Harian");
+
+        report_BuyDate.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_BuyDate.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_btnMakeDailyBuy.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeDailyBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeDailyBuy.setLayout(new java.awt.BorderLayout());
+
+        jLabel36.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("Buat Laporan");
+        report_btnMakeDailyBuy.add(jLabel36, java.awt.BorderLayout.CENTER);
+
+        jLabel37.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel37.setText("Laporan Pembelian Tahunan");
+
+        report_BuyMonth.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_BuyMonth.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_btnMakeMonthBuy.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeMonthBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeMonthBuy.setLayout(new java.awt.BorderLayout());
+
+        jLabel38.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel38.setText("Buat Laporan");
+        report_btnMakeMonthBuy.add(jLabel38, java.awt.BorderLayout.CENTER);
+
+        jLabel39.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel39.setText("Laporan Pembelian Bulanan");
+
+        report_BuyYear.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_BuyYear.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_btnMakeYearBuy.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeYearBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeYearBuy.setLayout(new java.awt.BorderLayout());
+
+        jLabel40.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("Buat Laporan");
+        report_btnMakeYearBuy.add(jLabel40, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout reportPaneLayout = new javax.swing.GroupLayout(reportPane);
         reportPane.setLayout(reportPaneLayout);
         reportPaneLayout.setHorizontalGroup(
             reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(425, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_SellDate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_btnMakeDailySell, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_SellMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_btnMakeMonthSell, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_SellYear, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_btnMakeYearSell, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_BuyDate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_btnMakeDailyBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_BuyMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_btnMakeMonthBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_BuyYear, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(report_btnMakeYearBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 81, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         reportPaneLayout.setVerticalGroup(
             reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(reportPaneLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(reportPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(6, 6, 6)
+                                .addComponent(report_SellDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(report_btnMakeDailySell, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addGap(6, 6, 6)
+                                .addComponent(report_SellMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(report_btnMakeMonthSell, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel33)
+                                .addGap(6, 6, 6)
+                                .addComponent(report_SellYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(report_btnMakeYearSell, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(reportPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(report_BuyDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(report_btnMakeDailyBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel39)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(report_BuyMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(report_btnMakeMonthBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel37)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(report_BuyYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(report_btnMakeYearBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         mainPane.add(reportPane, "card2");
@@ -1375,6 +1629,10 @@ public class MainFrm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buy_tIdKeyPressed
 
+    private void report_btnMakeDailySellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeDailySellMouseClicked
+        reportController.getSellDailyReport();
+    }//GEN-LAST:event_report_btnMakeDailySellMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1430,9 +1688,11 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JPanel homeIndicator;
     private javax.swing.JPanel homePane;
     private javax.swing.JLabel home_lblStatus;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1454,12 +1714,23 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1486,6 +1757,18 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JTable med_table;
     private javax.swing.JPanel reportIndicator;
     private javax.swing.JPanel reportPane;
+    private javax.swing.JComboBox<String> report_BuyDate;
+    private javax.swing.JComboBox<String> report_BuyMonth;
+    private javax.swing.JComboBox<String> report_BuyYear;
+    private javax.swing.JComboBox<String> report_SellDate;
+    private javax.swing.JComboBox<String> report_SellMonth;
+    private javax.swing.JComboBox<String> report_SellYear;
+    private javax.swing.JPanel report_btnMakeDailyBuy;
+    private javax.swing.JPanel report_btnMakeDailySell;
+    private javax.swing.JPanel report_btnMakeMonthBuy;
+    private javax.swing.JPanel report_btnMakeMonthSell;
+    private javax.swing.JPanel report_btnMakeYearBuy;
+    private javax.swing.JPanel report_btnMakeYearSell;
     private javax.swing.JPanel sellIndicator;
     private javax.swing.JPanel sellPane;
     private javax.swing.JPanel sell_btnAdd;
