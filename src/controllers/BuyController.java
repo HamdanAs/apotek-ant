@@ -111,8 +111,20 @@ public class BuyController {
         
     }
     
+    public void getMedById(){
+        lm = pImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
+        
+        frame.getBuy_tName().setSelectedItem(lm.get(0).getName());
+    }
+    
+    public void getMedByName(){
+        lm = pImp.getMedByName((String) frame.getBuy_tName().getSelectedItem());
+        
+        frame.getBuy_tId().setText(Integer.toString(lm.get(0).getId()));
+    }
+    
     public void addRow(){
-        lm = pImp.getMedDetail((String) frame.getBuy_tName().getSelectedItem());
+        lm = pImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
         
         String[] data = new String[5];
         

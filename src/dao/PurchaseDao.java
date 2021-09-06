@@ -27,7 +27,8 @@ public class PurchaseDao implements PurchaseImp{
     final String insert = "insert into purchases values (null, ?,?,?)";
     final String all = "select * from purchases";
     final String med = "select * from med";
-    final String medDetail = "select * from med where name=?";
+    final String medByName = "select * from med where name=?";
+    final String medById = "select * from med where id=?";
     
     public PurchaseDao(){
         conn = Database.connection();
@@ -101,12 +102,35 @@ public class PurchaseDao implements PurchaseImp{
     }
 
     @Override
-    public List<Med> getMedDetail(String name) {
+    public List<Med> getMedByName(String name) {
         List<Med> lm = null;
         try {
             lm = new ArrayList<>();
-            PreparedStatement stat = conn.prepareStatement(medDetail);
+            PreparedStatement stat = conn.prepareStatement(medByName);
             stat.setString(1, name);
+            ResultSet res = stat.executeQuery();
+            while(res.next()){
+                Med m = new Med();
+                m.setId(res.getInt(1));
+                m.setName(res.getString(2));
+                m.setDesctription(res.getString(3));
+                m.setPrice(res.getInt(4));
+                lm.add(m);
+            }
+        } catch (SQLException e){
+            System.err.println(e);
+        }
+        
+        return lm;
+    }
+
+    @Override
+    public List<Med> getMedById(int id) {
+        List<Med> lm = null;
+        try {
+            lm = new ArrayList<>();
+            PreparedStatement stat = conn.prepareStatement(medById);
+            stat.setInt(1, id);
             ResultSet res = stat.executeQuery();
             while(res.next()){
                 Med m = new Med();

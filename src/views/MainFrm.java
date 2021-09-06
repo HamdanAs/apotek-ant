@@ -9,6 +9,7 @@ import controllers.BuyController;
 import controllers.MedController;
 import controllers.SellController;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,6 +45,7 @@ public class MainFrm extends javax.swing.JFrame {
         
         lblStatus.setText("Beranda");
         changePane(homePane);
+        changeIndicator(homeIndicator);
     }
 
     /**
@@ -80,6 +82,10 @@ public class MainFrm extends javax.swing.JFrame {
     
     private void changeColor(JPanel target, Color rand){
         target.setBackground(rand);
+    }
+    
+    public void changeUsername(String name){
+        home_lblStatus.setText("Selamat datang, " + name);
     }
 
     public JTextArea getMed_tDescription() {
@@ -207,7 +213,7 @@ public class MainFrm extends javax.swing.JFrame {
         med_btnReset = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         homePane = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        home_lblStatus = new javax.swing.JLabel();
         sellPane = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         sell_tId = new javax.swing.JTextField();
@@ -587,7 +593,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(212, 236, 221));
         jLabel9.setText("ID Obat");
 
-        med_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        med_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(212, 236, 221));
@@ -597,24 +603,26 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(212, 236, 221));
         jLabel15.setText("Harga Obat");
 
-        med_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        med_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
-        med_tPrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        med_tPrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(212, 236, 221));
         jLabel16.setText("Stok");
 
         med_tStock.setEditable(false);
-        med_tStock.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        med_tStock.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(212, 236, 221));
         jLabel17.setText("Deskripsi");
 
         med_tDescription.setColumns(20);
-        med_tDescription.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        med_tDescription.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        med_tDescription.setLineWrap(true);
         med_tDescription.setRows(5);
+        med_tDescription.setWrapStyleWord(true);
         jScrollPane1.setViewportView(med_tDescription);
 
         med_btnSave.setBackground(new java.awt.Color(21, 45, 53));
@@ -711,7 +719,7 @@ public class MainFrm extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(med_table);
 
-        med_tSearch.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        med_tSearch.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel21.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(212, 236, 221));
@@ -770,8 +778,8 @@ public class MainFrm extends javax.swing.JFrame {
         medPaneLayout.setHorizontalGroup(
             medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(medPaneLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
                     .addGroup(medPaneLayout.createSequentialGroup()
                         .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -790,7 +798,7 @@ public class MainFrm extends javax.swing.JFrame {
                             .addComponent(med_tPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(med_tId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(med_tStock, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(med_btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -799,9 +807,8 @@ public class MainFrm extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(med_btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(med_btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 12, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(med_btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         medPaneLayout.setVerticalGroup(
             medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -842,7 +849,7 @@ public class MainFrm extends javax.swing.JFrame {
                         .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(med_btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(med_btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -852,9 +859,9 @@ public class MainFrm extends javax.swing.JFrame {
         homePane.setBackground(new java.awt.Color(52, 91, 99));
         homePane.setForeground(new java.awt.Color(212, 236, 221));
 
-        jLabel10.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(212, 236, 221));
-        jLabel10.setText("Home");
+        home_lblStatus.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        home_lblStatus.setForeground(new java.awt.Color(212, 236, 221));
+        home_lblStatus.setText("Selamat Datang");
 
         javax.swing.GroupLayout homePaneLayout = new javax.swing.GroupLayout(homePane);
         homePane.setLayout(homePaneLayout);
@@ -862,14 +869,14 @@ public class MainFrm extends javax.swing.JFrame {
             homePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePaneLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jLabel10)
-                .addContainerGap(512, Short.MAX_VALUE))
+                .addComponent(home_lblStatus)
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         homePaneLayout.setVerticalGroup(
             homePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePaneLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel10)
+                .addComponent(home_lblStatus)
                 .addContainerGap(414, Short.MAX_VALUE))
         );
 
@@ -882,19 +889,24 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(212, 236, 221));
         jLabel11.setText("ID Obat");
 
-        sell_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        sell_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        sell_tId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sell_tIdKeyPressed(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(212, 236, 221));
         jLabel24.setText("Nama Obat");
 
-        sell_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        sell_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(212, 236, 221));
         jLabel25.setText("Qty");
 
-        sell_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        sell_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         sell_btnAdd.setBackground(new java.awt.Color(21, 45, 53));
         sell_btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -942,7 +954,8 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel27.setForeground(new java.awt.Color(212, 236, 221));
         jLabel27.setText("Total");
 
-        sell_tTotal.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        sell_tTotal.setEditable(false);
+        sell_tTotal.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         sell_btnPay.setBackground(new java.awt.Color(21, 45, 53));
         sell_btnPay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -965,7 +978,7 @@ public class MainFrm extends javax.swing.JFrame {
         );
         sell_btnPayLayout.setVerticalGroup(
             sell_btnPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout sellPaneLayout = new javax.swing.GroupLayout(sellPane);
@@ -1040,19 +1053,24 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel28.setForeground(new java.awt.Color(212, 236, 221));
         jLabel28.setText("ID Obat");
 
-        buy_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        buy_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        buy_tId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buy_tIdKeyPressed(evt);
+            }
+        });
 
         jLabel29.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(212, 236, 221));
         jLabel29.setText("Nama Obat");
 
-        buy_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        buy_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel30.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(212, 236, 221));
         jLabel30.setText("Qty");
 
-        buy_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        buy_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         buy_btnAdd.setBackground(new java.awt.Color(21, 45, 53));
         buy_btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1100,7 +1118,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel32.setForeground(new java.awt.Color(212, 236, 221));
         jLabel32.setText("Total");
 
-        buy_tTotal.setFont(new java.awt.Font("Poppins SemiBold", 0, 10)); // NOI18N
+        buy_tTotal.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         buy_btnPay.setBackground(new java.awt.Color(21, 45, 53));
         buy_btnPay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1123,7 +1141,7 @@ public class MainFrm extends javax.swing.JFrame {
         );
         buy_btnPayLayout.setVerticalGroup(
             buy_btnPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout buyPaneLayout = new javax.swing.GroupLayout(buyPane);
@@ -1227,7 +1245,8 @@ public class MainFrm extends javax.swing.JFrame {
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         if(JOptionPane.showConfirmDialog(null, "Apakah anda yakin akan keluar?", "Logout", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){        
-            System.exit(0);
+            this.dispose();
+            new LoginFrm().setVisible(true);
         }
     }//GEN-LAST:event_btnCloseMouseClicked
 
@@ -1276,7 +1295,8 @@ public class MainFrm extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         if(JOptionPane.showConfirmDialog(null, "Apakah anda yakin akan keluar?", "Logout", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){        
-            System.exit(0);
+            this.dispose();
+            new LoginFrm().setVisible(true);
         }
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -1347,6 +1367,18 @@ public class MainFrm extends javax.swing.JFrame {
         buyController.reset();
     }//GEN-LAST:event_buy_btnPayMouseClicked
 
+    private void sell_tIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_tIdKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+        }
+    }//GEN-LAST:event_sell_tIdKeyPressed
+
+    private void buy_tIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buy_tIdKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            buyController.getMedById();
+        }
+    }//GEN-LAST:event_buy_tIdKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1400,11 +1432,9 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JTextField buy_tTotal;
     private javax.swing.JTable buy_table;
     private javax.swing.JPanel homeIndicator;
-    private javax.swing.JPanel homeIndicator1;
-    private javax.swing.JPanel homeIndicator2;
     private javax.swing.JPanel homePane;
+    private javax.swing.JLabel home_lblStatus;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

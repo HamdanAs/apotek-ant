@@ -5,6 +5,7 @@
  */
 package apotek_ant;
 
+import views.LoginFrm;
 import views.MainFrm;
 
 /**
@@ -17,7 +18,7 @@ public class Apotek_ant {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new MainFrm().setVisible(true);
+        new LoginFrm().setVisible(true);
     }
     
 }
