@@ -245,7 +245,7 @@ public class MainFrm extends javax.swing.JFrame {
         buy_btnPay = new javax.swing.JPanel();
         label1 = new javax.swing.JLabel();
         reportPane = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1212,25 +1212,21 @@ public class MainFrm extends javax.swing.JFrame {
         reportPane.setBackground(new java.awt.Color(52, 91, 99));
         reportPane.setForeground(new java.awt.Color(212, 236, 221));
 
-        jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(212, 236, 221));
-        jLabel13.setText("Laporan");
-
         javax.swing.GroupLayout reportPaneLayout = new javax.swing.GroupLayout(reportPane);
         reportPane.setLayout(reportPaneLayout);
         reportPaneLayout.setHorizontalGroup(
             reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPaneLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel13)
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(425, Short.MAX_VALUE))
         );
         reportPaneLayout.setVerticalGroup(
             reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPaneLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel13)
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(439, Short.MAX_VALUE))
         );
 
         mainPane.add(reportPane, "card2");
@@ -1434,9 +1430,9 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JPanel homeIndicator;
     private javax.swing.JPanel homePane;
     private javax.swing.JLabel home_lblStatus;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
