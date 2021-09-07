@@ -66,6 +66,7 @@ public class ReportController {
         
         listSell.forEach((list) -> {
             frame.getReport_SellYear().addItem(list);
+            frame.getReport_SellMonth1().addItem(list);
         });
     }
     
@@ -96,6 +97,7 @@ public class ReportController {
         
         listSell.forEach((list) -> {
             frame.getReport_BuyYear().addItem(list);
+            frame.getReport_BuyMonth1().addItem(list);
         });
     }
     
@@ -120,4 +122,38 @@ public class ReportController {
         }
     }
     
+    public void getSellMonthlyReport(){
+        if(frame.getReport_SellMonth().getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih dulu bulan", "Laporan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                String jrxmlFile = "src/reports/laporan_penjualan_bulanan.jrxml";
+                HashMap param = new HashMap();
+                param.put("month", Integer.parseInt(frame.getReport_SellMonth().getSelectedItem().toString()));
+                param.put("year", Integer.parseInt(frame.getReport_SellMonth1().getSelectedItem().toString()));
+                JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+                JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e){
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public void getSellYearlyReport(){
+        if(frame.getReport_SellYear().getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih dulu tahun", "Laporan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                String jrxmlFile = "src/reports/laporan_penjualan_tahunan.jrxml";
+                HashMap param = new HashMap();
+                param.put("year", Integer.parseInt(frame.getReport_SellYear().getSelectedItem().toString()));
+                JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+                JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e){
+                System.err.println(e);
+            }
+        }
+    }
 }

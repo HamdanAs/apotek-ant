@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95e91ac2-731d-4541-a39a-eab0cfc4c571">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Apotek"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="year" class="java.lang.Integer"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT purchases.total, purchases.date, purchases.transaction_code, sum(purchase_details.qty)
-FROM purchases right join purchase_details on purchases.id = purchase_details.transaction_id where year(purchases.date) = $P{year}]]>
+FROM purchases right join purchase_details on purchases.id = purchase_details.transaction_id where year(purchases.date) = $P{year} group by purchase_details.transaction_id]]>
 	</queryString>
 	<field name="total" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="total"/>
@@ -33,6 +35,9 @@ FROM purchases right join purchase_details on purchases.id = purchase_details.tr
 	<variable name="total1" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
+	<variable name="total_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -53,32 +58,17 @@ FROM purchases right join purchase_details on purchases.id = purchase_details.tr
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="12" y="7" width="100" height="20" uuid="a0894ee3-e674-426a-930f-5cc4b7451f1e"/>
-				<textElement>
-					<font fontName="rockwell&#xD;&#xA;" size="11"/>
-				</textElement>
+				<reportElement x="10" y="8" width="100" height="20" uuid="a66b136a-ab0c-4dc1-a2e6-3fa4fddad0b1"/>
 				<text><![CDATA[Tahun]]></text>
 			</staticText>
-			<textField pattern="yyyy" isBlankWhenNull="true">
-				<reportElement x="122" y="7" width="100" height="20" uuid="ebcf118b-4c54-4e69-86d6-bf55a7310797"/>
-				<textElement>
-					<font fontName="rockwell" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			<textField>
+				<reportElement x="130" y="8" width="100" height="20" uuid="7079e6f8-ab3d-46d1-9575-b6763bf76dc6"/>
+				<textFieldExpression><![CDATA[$P{year}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="37" splitType="Stretch">
-			<staticText>
-				<reportElement x="10" y="11" width="100" height="20" uuid="76e3679a-3ce4-406c-afff-e7702918fbb2">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c004f4d7-beff-46fc-af8a-8c6911bb8798"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="rockwell"/>
-				</textElement>
-				<text><![CDATA[Kode Transaksi]]></text>
-			</staticText>
 			<line>
 				<reportElement x="10" y="10" width="535" height="1" uuid="87f35d83-d3a7-47c6-bd12-b5b8d491f7f2"/>
 			</line>
@@ -86,52 +76,35 @@ FROM purchases right join purchase_details on purchases.id = purchase_details.tr
 				<reportElement x="10" y="31" width="535" height="1" uuid="44658e86-1544-4ae4-9634-22985b8f6b07"/>
 			</line>
 			<staticText>
-				<reportElement x="342" y="10" width="100" height="20" uuid="1e9ac01e-2e4f-421b-ad3b-a59c74836cf1">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c004f4d7-beff-46fc-af8a-8c6911bb8798"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="rockwell"/>
-				</textElement>
-				<text><![CDATA[Barang Terjual]]></text>
+				<reportElement x="10" y="11" width="100" height="20" uuid="13242c10-09d5-43fa-84e3-166673a24ab5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[No Pembelian]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="444" y="11" width="100" height="20" uuid="120f101e-0a15-4d14-ad07-24466fce11ef">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c004f4d7-beff-46fc-af8a-8c6911bb8798"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="rockwell"/>
-				</textElement>
+				<reportElement x="445" y="11" width="100" height="20" uuid="d2a240fc-b58f-4d71-9bef-4d1ba1083f12"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="11" width="100" height="20" uuid="459d07f6-af76-4894-957c-068ddae2ab71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Barang Dibeli]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="28" splitType="Stretch">
-			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="6" width="100" height="20" isRemoveLineWhenBlank="true" uuid="c30e5c17-607a-4814-b212-150939f6dc4a">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c004f4d7-beff-46fc-af8a-8c6911bb8798"/>
-				</reportElement>
-				<textElement>
-					<font fontName="rockwell&#xD;&#xA;"/>
-				</textElement>
+			<textField>
+				<reportElement x="10" y="4" width="100" height="20" uuid="2ac2d06d-050e-4e41-986e-b05c3939c683"/>
 				<textFieldExpression><![CDATA[$F{transaction_code}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="342" y="6" width="100" height="18" isRemoveLineWhenBlank="true" uuid="a5b8dbff-cafe-4616-bfcd-5a791b3d902c">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5a6d62f1-a654-40ed-9860-019cece21aa8"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="rockwell&#xD;&#xA;"/>
-				</textElement>
+			<textField>
+				<reportElement x="342" y="4" width="100" height="20" uuid="0586bb33-af17-4c49-af74-c612eda34777"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{sum(purchase_details.qty)}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.###;#,##0.###-" isBlankWhenNull="true">
-				<reportElement x="444" y="6" width="100" height="18" isRemoveLineWhenBlank="true" uuid="8c0f297c-c2e5-495a-972d-0e250e4c22d6">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45856ecb-dfd3-4da8-a0a4-bba7f3a8e9ec"/>
-				</reportElement>
-				<textElement>
-					<font fontName="rockwell&#xD;&#xA;"/>
-				</textElement>
+			<textField pattern="#,##0;#,##0-">
+				<reportElement x="445" y="4" width="100" height="20" uuid="4bafca37-d143-4d83-a932-99b0068f5916"/>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -144,28 +117,22 @@ FROM purchases right join purchase_details on purchases.id = purchase_details.tr
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch">
-			<staticText>
-				<reportElement x="10" y="11" width="100" height="20" uuid="d13a7f7e-0bae-427b-a88f-d20d2534de58">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c004f4d7-beff-46fc-af8a-8c6911bb8798"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="rockwell"/>
-				</textElement>
-				<text><![CDATA[Grand Total]]></text>
-			</staticText>
-			<textField pattern="#,##0.###;#,##0.###-" isBlankWhenNull="true">
-				<reportElement x="444" y="11" width="100" height="20" isRemoveLineWhenBlank="true" uuid="c75eaa6d-1186-4d85-a64b-52a1dd61f3df"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="rockwell&#xD;&#xA;"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{total1}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="10" y="10" width="535" height="1" uuid="feddb32a-3c3e-4170-841f-f3fb90e07e02"/>
 			</line>
 			<line>
 				<reportElement x="10" y="31" width="535" height="1" uuid="5fb4786b-39d3-4e00-a848-8b5b6031c946"/>
 			</line>
+			<staticText>
+				<reportElement x="10" y="12" width="100" height="20" uuid="0d47f869-d261-485b-a2ce-c1ba928daf15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<textField pattern="#,##0;#,##0-">
+				<reportElement x="445" y="10" width="100" height="20" uuid="314dc96d-a74f-42eb-b7e4-9d48ab4758db"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

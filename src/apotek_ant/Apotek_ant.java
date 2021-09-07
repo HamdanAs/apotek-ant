@@ -6,7 +6,6 @@
 package apotek_ant;
 
 import views.LoginFrm;
-import views.MainFrm;
 
 /**
  *

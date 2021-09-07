@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="apotek_obat" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f09af78-b228-43b7-ae68-1b8dfb11bca1">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Apotek"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
 		<![CDATA[select * , curdate() as date from med where stock <> 0]]>
 	</queryString>
@@ -66,16 +68,18 @@
 	<pageHeader>
 		<band height="50" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="6" width="120" height="24" uuid="c6601b54-cea2-439a-85a6-b7f6c8cbc7cc"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement mode="Transparent" x="20" y="6" width="120" height="24" forecolor="#000000" backcolor="#FFFFFF" uuid="c6601b54-cea2-439a-85a6-b7f6c8cbc7cc"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Per Tanggal]]></text>
 			</staticText>
-			<textField pattern="M/d/yy">
-				<reportElement x="160" y="6" width="100" height="24" uuid="3d16821c-b050-46d8-a6d1-1349c366d4ed"/>
-				<textElement>
-					<font size="12"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="160" y="6" width="100" height="24" forecolor="#000000" backcolor="#FFFFFF" uuid="3d16821c-b050-46d8-a6d1-1349c366d4ed"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
@@ -87,40 +91,44 @@
 	<columnHeader>
 		<band height="43" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="0" width="100" height="30" uuid="deae7e79-3e84-43e9-9601-905be31debb3">
+				<reportElement mode="Transparent" x="20" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="deae7e79-3e84-43e9-9601-905be31debb3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="210ecffb-707b-4aad-becf-681be15fa524"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Segoe UI" size="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[name]]></text>
+				<text><![CDATA[Nama Obat]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="0" width="40" height="30" uuid="06a21b93-7d20-40d7-9a3e-0e4c398d2530">
+				<reportElement mode="Transparent" x="380" y="0" width="40" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="06a21b93-7d20-40d7-9a3e-0e4c398d2530">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a4d3a663-db27-41f9-b54f-c2b77118d012"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Segoe UI" size="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[stock]]></text>
+				<text><![CDATA[Stok]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="270" y="0" width="100" height="30" uuid="f4be5d5e-ec74-41f2-bc62-0a4450a52a5a">
+				<reportElement mode="Transparent" x="270" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="f4be5d5e-ec74-41f2-bc62-0a4450a52a5a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eadc314b-d998-4873-aa4c-776dd8482522"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Segoe UI" size="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[price]]></text>
+				<text><![CDATA[Harga]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="430" y="0" width="100" height="30" uuid="a3f4d84e-d865-49f2-9451-e1115b67d269">
+				<reportElement mode="Transparent" x="430" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="a3f4d84e-d865-49f2-9451-e1115b67d269">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="12da7014-e349-4377-89a5-64a71041bd80"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Segoe UI" size="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[total]]></text>
+				<text><![CDATA[Total]]></text>
 			</staticText>
 			<line>
 				<reportElement x="10" y="30" width="540" height="1" uuid="9bb0e8b1-48ac-4b41-8696-b66ce1cfa3e8"/>
@@ -130,9 +138,13 @@
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="20" y="0" width="240" height="30" uuid="cc619b82-b86c-4e0b-871c-c3585d9084e9">
+				<reportElement mode="Transparent" x="20" y="0" width="240" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="cc619b82-b86c-4e0b-871c-c3585d9084e9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="210ecffb-707b-4aad-becf-681be15fa524"/>
 				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -143,9 +155,13 @@
 				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.####;#,##0.####-">
-				<reportElement x="270" y="0" width="100" height="30" uuid="b7df69a5-4fe3-4792-ae51-d016848cccb8">
+				<reportElement mode="Transparent" x="270" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="b7df69a5-4fe3-4792-ae51-d016848cccb8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eadc314b-d998-4873-aa4c-776dd8482522"/>
 				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.###;#,##0.###-">
@@ -163,7 +179,11 @@
 	<summary>
 		<band height="38" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="8" width="100" height="20" uuid="ffbad3d5-c8a2-4967-8d34-49477307ef9c"/>
+				<reportElement mode="Transparent" x="20" y="8" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ffbad3d5-c8a2-4967-8d34-49477307ef9c"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<textField pattern="#,##0.###;#,##0.###-">

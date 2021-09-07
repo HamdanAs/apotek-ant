@@ -1748,32 +1748,40 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel35" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_SellDate" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_btnMakeDailySell" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" pref="178" max="-2" attributes="0"/>
-                              <Component id="report_SellMonth" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="report_SellMonth" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="report_SellMonth1" min="-2" pref="83" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="report_btnMakeMonthSell" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="jLabel33" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_SellYear" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_btnMakeYearSell" min="-2" pref="178" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="82" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel12" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_BuyDate" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_btnMakeDailyBuy" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="jLabel37" min="-2" pref="178" max="-2" attributes="0"/>
-                              <Component id="report_BuyMonth" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="report_BuyMonth" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="report_BuyMonth1" max="32767" attributes="0"/>
+                              </Group>
                               <Component id="report_btnMakeMonthBuy" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="jLabel39" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_BuyYear" min="-2" pref="178" max="-2" attributes="0"/>
                               <Component id="report_btnMakeYearBuy" min="-2" pref="178" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="81" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="75" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
                   </Group>
@@ -1795,7 +1803,10 @@
                                           <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                          <Component id="report_SellMonth" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="report_SellMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="report_SellMonth1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                           <Component id="report_btnMakeMonthSell" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
@@ -1814,8 +1825,11 @@
                                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                           <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="report_BuyMonth" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="report_BuyMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="report_BuyMonth1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
                                           <Component id="report_btnMakeMonthBuy" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
@@ -1828,7 +1842,7 @@
                               </Group>
                           </Group>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="92" max="32767" attributes="0"/>
+                          <EmptySpace pref="88" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1931,6 +1945,9 @@
                       <Color id="Hand Cursor"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="report_btnMakeMonthSellMouseClicked"/>
+                  </Events>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                   <SubComponents>
@@ -1986,6 +2003,9 @@
                       <Color blue="31" green="20" red="11" type="rgb"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="report_btnMakeYearSellMouseClicked"/>
+                  </Events>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                   <SubComponents>
@@ -2222,6 +2242,38 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JComboBox" name="report_SellMonth1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Poppins SemiBold" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="31" green="20" red="11" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="report_BuyMonth1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Poppins SemiBold" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="31" green="20" red="11" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

@@ -189,6 +189,16 @@ public class MainFrm extends javax.swing.JFrame {
     public JComboBox<String> getReport_BuyYear() {
         return report_BuyYear;
     }
+
+    public JComboBox<String> getReport_BuyMonth1() {
+        return report_BuyMonth1;
+    }
+
+    public JComboBox<String> getReport_SellMonth1() {
+        return report_SellMonth1;
+    }
+    
+    
     
     
     
@@ -305,6 +315,8 @@ public class MainFrm extends javax.swing.JFrame {
         report_BuyYear = new javax.swing.JComboBox<>();
         report_btnMakeYearBuy = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
+        report_SellMonth1 = new javax.swing.JComboBox<>();
+        report_BuyMonth1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1302,6 +1314,11 @@ public class MainFrm extends javax.swing.JFrame {
 
         report_btnMakeMonthSell.setBackground(new java.awt.Color(17, 32, 49));
         report_btnMakeMonthSell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeMonthSell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMakeMonthSellMouseClicked(evt);
+            }
+        });
         report_btnMakeMonthSell.setLayout(new java.awt.BorderLayout());
 
         jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -1318,6 +1335,11 @@ public class MainFrm extends javax.swing.JFrame {
         report_SellYear.setForeground(new java.awt.Color(17, 32, 49));
 
         report_btnMakeYearSell.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMakeYearSell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMakeYearSellMouseClicked(evt);
+            }
+        });
         report_btnMakeYearSell.setLayout(new java.awt.BorderLayout());
 
         jLabel34.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -1403,36 +1425,48 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel40.setText("Buat Laporan");
         report_btnMakeYearBuy.add(jLabel40, java.awt.BorderLayout.CENTER);
 
+        report_SellMonth1.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_SellMonth1.setForeground(new java.awt.Color(17, 32, 49));
+
+        report_BuyMonth1.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        report_BuyMonth1.setForeground(new java.awt.Color(17, 32, 49));
+
         javax.swing.GroupLayout reportPaneLayout = new javax.swing.GroupLayout(reportPane);
         reportPane.setLayout(reportPaneLayout);
         reportPaneLayout.setHorizontalGroup(
             reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPaneLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_SellDate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_btnMakeDailySell, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(report_SellMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(reportPaneLayout.createSequentialGroup()
+                        .addComponent(report_SellMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(report_SellMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(report_btnMakeMonthSell, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_SellYear, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_btnMakeYearSell, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
+                .addGap(88, 88, 88)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_BuyDate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_btnMakeDailyBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(report_BuyMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(reportPaneLayout.createSequentialGroup()
+                        .addComponent(report_BuyMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(report_BuyMonth1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(report_btnMakeMonthBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_BuyYear, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report_btnMakeYearBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 81, Short.MAX_VALUE))
+                .addGap(0, 75, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         reportPaneLayout.setVerticalGroup(
@@ -1452,7 +1486,9 @@ public class MainFrm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
                                 .addGap(6, 6, 6)
-                                .addComponent(report_SellMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(report_SellMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(report_SellMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(6, 6, 6)
                                 .addComponent(report_btnMakeMonthSell, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1470,7 +1506,9 @@ public class MainFrm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel39)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(report_BuyMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(report_BuyMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(report_BuyMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(report_btnMakeMonthBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1480,7 +1518,7 @@ public class MainFrm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(report_btnMakeYearBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         mainPane.add(reportPane, "card2");
@@ -1633,6 +1671,14 @@ public class MainFrm extends javax.swing.JFrame {
         reportController.getSellDailyReport();
     }//GEN-LAST:event_report_btnMakeDailySellMouseClicked
 
+    private void report_btnMakeMonthSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeMonthSellMouseClicked
+        reportController.getSellMonthlyReport();
+    }//GEN-LAST:event_report_btnMakeMonthSellMouseClicked
+
+    private void report_btnMakeYearSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeYearSellMouseClicked
+        reportController.getSellYearlyReport();
+    }//GEN-LAST:event_report_btnMakeYearSellMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1759,9 +1805,11 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JPanel reportPane;
     private javax.swing.JComboBox<String> report_BuyDate;
     private javax.swing.JComboBox<String> report_BuyMonth;
+    private javax.swing.JComboBox<String> report_BuyMonth1;
     private javax.swing.JComboBox<String> report_BuyYear;
     private javax.swing.JComboBox<String> report_SellDate;
     private javax.swing.JComboBox<String> report_SellMonth;
+    private javax.swing.JComboBox<String> report_SellMonth1;
     private javax.swing.JComboBox<String> report_SellYear;
     private javax.swing.JPanel report_btnMakeDailyBuy;
     private javax.swing.JPanel report_btnMakeDailySell;
