@@ -90,10 +90,6 @@ public class MainFrm extends javax.swing.JFrame {
         }
     }
     
-    private void changeColor(JPanel target, Color rand){
-        target.setBackground(rand);
-    }
-    
     public void changeUsername(String name){
         home_lblStatus.setText("Selamat datang, " + name);
     }
@@ -1627,7 +1623,7 @@ public class MainFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutMouseClicked
 
     private void btnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseEntered
-        changeColor(homePane, new Color(17, 32, 49));
+        
     }//GEN-LAST:event_btnHomeMouseEntered
 
     private void med_btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSaveMouseClicked

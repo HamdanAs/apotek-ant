@@ -8,6 +8,7 @@ package database;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,8 @@ public class Database {
             try {
                 conn = sql.getConnection();
             } catch (SQLException e){
-                System.err.println(e);
+                JOptionPane.showMessageDialog(null, "Koneksi ke database gagal! silahkan cek koneksi terlebih dahulu!", "Koneksi Gagal", JOptionPane.WARNING_MESSAGE);
+                System.exit(0);
                 return null;
             }
         }
