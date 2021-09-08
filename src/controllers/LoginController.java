@@ -31,7 +31,7 @@ public class LoginController {
         String username = frame.gettUsername().getText();
         String password = new String(frame.gettPassword().getPassword());
         
-        list = loginImp.getInfo(username, username);
+        list = loginImp.getInfo(username, password);
         
         if(list.isEmpty()){
             JOptionPane.showMessageDialog(null, "Username Salah!", "Login gagal", JOptionPane.WARNING_MESSAGE);
@@ -42,6 +42,10 @@ public class LoginController {
             MainFrm mainFrm = new MainFrm();
             mainFrm.setVisible(true);
             mainFrm.changeUsername(username);
+            mainFrm.setUsername(username);
+            mainFrm.setId(list.get(0).getId());
+            mainFrm.setLevel(list.get(0).getLevel());
+            mainFrm.checkLevel();
             frame.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Password salah!", "Login gagal", JOptionPane.WARNING_MESSAGE);

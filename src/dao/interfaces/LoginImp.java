@@ -14,4 +14,10 @@ import models.Login;
  */
 public interface LoginImp {
     public List<Login> getInfo(String username, String password);
+    public void insert(Login l);
+    public void update(Login l);
+    public void delete(int id);
+    public List<Login> all();
+    public List<Login> find(String name);
+    public List<Login> getPassword(int id);
 }
