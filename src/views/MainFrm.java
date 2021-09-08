@@ -135,7 +135,7 @@ public class MainFrm extends javax.swing.JFrame {
     }
 
     public JTextField getSell_tQty() {
-        return sell_tQty;
+        return buy_tQty;
     }
 
     public JTextField getSell_tTotal() {
@@ -155,7 +155,7 @@ public class MainFrm extends javax.swing.JFrame {
     }
 
     public JTextField getBuy_tQty() {
-        return buy_tQty;
+        return sell_tQty;
     }
 
     public JTextField getBuy_tTotal() {
@@ -264,7 +264,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         sell_tName = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        sell_tQty = new javax.swing.JTextField();
+        buy_tQty = new javax.swing.JTextField();
         sell_btnAdd = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -279,7 +279,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         buy_tName = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
-        buy_tQty = new javax.swing.JTextField();
+        sell_tQty = new javax.swing.JTextField();
         buy_btnAdd = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -977,7 +977,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(212, 236, 221));
         jLabel25.setText("Qty");
 
-        sell_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        buy_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         sell_btnAdd.setBackground(new java.awt.Color(21, 45, 53));
         sell_btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1073,7 +1073,7 @@ public class MainFrm extends javax.swing.JFrame {
                             .addGroup(sellPaneLayout.createSequentialGroup()
                                 .addComponent(sell_tName, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sell_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buy_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(sell_btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(216, 216, 216))))
@@ -1103,7 +1103,7 @@ public class MainFrm extends javax.swing.JFrame {
                         .addGroup(sellPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(sell_tName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sell_btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sell_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(buy_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1141,7 +1141,12 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel30.setForeground(new java.awt.Color(212, 236, 221));
         jLabel30.setText("Qty");
 
-        buy_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        sell_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        sell_tQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sell_tQtyKeyPressed(evt);
+            }
+        });
 
         buy_btnAdd.setBackground(new java.awt.Color(21, 45, 53));
         buy_btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1229,14 +1234,17 @@ public class MainFrm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(buyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(buyPaneLayout.createSequentialGroup()
-                                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                                .addGap(345, 345, 345))
-                            .addGroup(buyPaneLayout.createSequentialGroup()
                                 .addComponent(buy_tName, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buy_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(buyPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(76, 76, 76)))
+                        .addGroup(buyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(buyPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                                .addGap(304, 304, 304))
+                            .addGroup(buyPaneLayout.createSequentialGroup()
+                                .addComponent(sell_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(buy_btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(216, 216, 216))))
@@ -1266,7 +1274,7 @@ public class MainFrm extends javax.swing.JFrame {
                         .addGroup(buyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(buy_tName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buy_btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buy_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(sell_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1383,6 +1391,11 @@ public class MainFrm extends javax.swing.JFrame {
 
         report_btnMakeDailyBuy.setBackground(new java.awt.Color(17, 32, 49));
         report_btnMakeDailyBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeDailyBuy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMakeDailyBuyMouseClicked(evt);
+            }
+        });
         report_btnMakeDailyBuy.setLayout(new java.awt.BorderLayout());
 
         jLabel36.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -1400,6 +1413,11 @@ public class MainFrm extends javax.swing.JFrame {
 
         report_btnMakeMonthBuy.setBackground(new java.awt.Color(17, 32, 49));
         report_btnMakeMonthBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeMonthBuy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMakeMonthBuyMouseClicked(evt);
+            }
+        });
         report_btnMakeMonthBuy.setLayout(new java.awt.BorderLayout());
 
         jLabel38.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -1417,6 +1435,11 @@ public class MainFrm extends javax.swing.JFrame {
 
         report_btnMakeYearBuy.setBackground(new java.awt.Color(17, 32, 49));
         report_btnMakeYearBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMakeYearBuy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMakeYearBuyMouseClicked(evt);
+            }
+        });
         report_btnMakeYearBuy.setLayout(new java.awt.BorderLayout());
 
         jLabel40.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -1657,13 +1680,14 @@ public class MainFrm extends javax.swing.JFrame {
 
     private void sell_tIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_tIdKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
+            sell_tId.requestFocus();
         }
     }//GEN-LAST:event_sell_tIdKeyPressed
 
     private void buy_tIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buy_tIdKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             buyController.getMedById();
+            buy_tQty.requestFocus();
         }
     }//GEN-LAST:event_buy_tIdKeyPressed
 
@@ -1678,6 +1702,24 @@ public class MainFrm extends javax.swing.JFrame {
     private void report_btnMakeYearSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeYearSellMouseClicked
         reportController.getSellYearlyReport();
     }//GEN-LAST:event_report_btnMakeYearSellMouseClicked
+
+    private void report_btnMakeDailyBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeDailyBuyMouseClicked
+        reportController.getBuyDailyReport();
+    }//GEN-LAST:event_report_btnMakeDailyBuyMouseClicked
+
+    private void report_btnMakeMonthBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeMonthBuyMouseClicked
+        reportController.getBuyMonthlyReport();
+    }//GEN-LAST:event_report_btnMakeMonthBuyMouseClicked
+
+    private void report_btnMakeYearBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMakeYearBuyMouseClicked
+        reportController.getBuyYearlyReport();
+    }//GEN-LAST:event_report_btnMakeYearBuyMouseClicked
+
+    private void sell_tQtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_tQtyKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+        }
+    }//GEN-LAST:event_sell_tQtyKeyPressed
 
     /**
      * @param args the command line arguments

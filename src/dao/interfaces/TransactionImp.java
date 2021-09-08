@@ -16,6 +16,8 @@ import java.util.List;
 public interface TransactionImp {
     public void insert(Transaction t);
     public List<Med> getMed();
-    public List<Med> getMedDetail(String name);
+    public List<Med> getMedByName(String name);
+    public List<Med> getMedById(int id);
     public List<Transaction> all();
+    
 }

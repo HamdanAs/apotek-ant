@@ -110,7 +110,7 @@ public class SellController {
     }
     
     public void addRow(){
-        lm = tImp.getMedDetail((String) frame.getSell_tName().getSelectedItem());
+        lm = tImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
         
         String[] data = new String[5];
         
@@ -138,5 +138,17 @@ public class SellController {
         }
         
         frame.getSell_tTotal().setText(Integer.toString(total));
+    }
+    
+    public void getMedById(){
+        lm = tImp.getMedById(Integer.parseInt(frame.getSell_tId().getText()));
+        
+        frame.getSell_tName().setSelectedItem(lm.get(0).getName());
+    }
+    
+    public void getMedByName(){
+        lm = tImp.getMedByName((String) frame.getSell_tName().getSelectedItem());
+        
+        frame.getSell_tId().setText(Integer.toString(lm.get(0).getId()));
     }
 }

@@ -48,7 +48,7 @@ FROM purchases right join purchase_details on purchases.id = purchase_details.tr
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Rockwell" size="18"/>
 				</textElement>
-				<text><![CDATA[LAPORAN PENJUALAN TAHUNAN]]></text>
+				<text><![CDATA[LAPORAN PEMBELIAN TAHUNAN]]></text>
 			</staticText>
 			<line>
 				<reportElement x="10" y="70" width="535" height="1" uuid="4b2f9bfc-9871-4223-a2a1-21b2b8cbb326"/>

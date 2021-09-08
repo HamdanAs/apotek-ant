@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -148,6 +146,62 @@ public class ReportController {
                 String jrxmlFile = "src/reports/laporan_penjualan_tahunan.jrxml";
                 HashMap param = new HashMap();
                 param.put("year", Integer.parseInt(frame.getReport_SellYear().getSelectedItem().toString()));
+                JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+                JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e){
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public void getBuyDailyReport(){
+        if(frame.getReport_BuyDate().getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih dulu tanggal", "Laporan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                
+                String date = frame.getReport_BuyDate().getSelectedItem().toString();
+                Date newDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                
+                String jrxmlFile = "src/reports/laporan_pembelian_harian.jrxml";
+                HashMap param = new HashMap();
+                param.put("date", newDate);
+                JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+                JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
+                JasperViewer.viewReport(print, false);
+            } catch (JRException | ParseException e){
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public void getBuyMonthlyReport(){
+        if(frame.getReport_BuyMonth().getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih dulu bulan", "Laporan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                String jrxmlFile = "src/reports/laporan_pembelian_bulanan.jrxml";
+                HashMap param = new HashMap();
+                param.put("month", Integer.parseInt(frame.getReport_BuyMonth().getSelectedItem().toString()));
+                param.put("year", Integer.parseInt(frame.getReport_BuyMonth1().getSelectedItem().toString()));
+                JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+                JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
+                JasperViewer.viewReport(print, false);
+            } catch (JRException e){
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public void getBuyYearlyReport(){
+        if(frame.getReport_BuyYear().getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih dulu tahun", "Laporan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                String jrxmlFile = "src/reports/laporan_pembelian_tahunan.jrxml";
+                HashMap param = new HashMap();
+                param.put("year", Integer.parseInt(frame.getReport_BuyYear().getSelectedItem().toString()));
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
                 JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
                 JasperViewer.viewReport(print, false);
