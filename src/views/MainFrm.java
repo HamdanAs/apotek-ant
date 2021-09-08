@@ -135,7 +135,7 @@ public class MainFrm extends javax.swing.JFrame {
     }
 
     public JTextField getSell_tQty() {
-        return buy_tQty;
+        return sell_tQty;
     }
 
     public JTextField getSell_tTotal() {
@@ -155,7 +155,7 @@ public class MainFrm extends javax.swing.JFrame {
     }
 
     public JTextField getBuy_tQty() {
-        return sell_tQty;
+        return buy_tQty;
     }
 
     public JTextField getBuy_tTotal() {
@@ -264,7 +264,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         sell_tName = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        buy_tQty = new javax.swing.JTextField();
+        sell_tQty = new javax.swing.JTextField();
         sell_btnAdd = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -279,7 +279,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         buy_tName = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
-        sell_tQty = new javax.swing.JTextField();
+        buy_tQty = new javax.swing.JTextField();
         buy_btnAdd = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -972,12 +972,22 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel24.setText("Nama Obat");
 
         sell_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        sell_tName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sell_tNameActionPerformed(evt);
+            }
+        });
 
         jLabel25.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(212, 236, 221));
         jLabel25.setText("Qty");
 
-        buy_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        sell_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        sell_tQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sell_tQtyKeyPressed(evt);
+            }
+        });
 
         sell_btnAdd.setBackground(new java.awt.Color(21, 45, 53));
         sell_btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1073,7 +1083,7 @@ public class MainFrm extends javax.swing.JFrame {
                             .addGroup(sellPaneLayout.createSequentialGroup()
                                 .addComponent(sell_tName, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buy_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sell_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(sell_btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(216, 216, 216))))
@@ -1103,7 +1113,7 @@ public class MainFrm extends javax.swing.JFrame {
                         .addGroup(sellPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(sell_tName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sell_btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buy_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(sell_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1136,15 +1146,20 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel29.setText("Nama Obat");
 
         buy_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        buy_tName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buy_tNameActionPerformed(evt);
+            }
+        });
 
         jLabel30.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(212, 236, 221));
         jLabel30.setText("Qty");
 
-        sell_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        sell_tQty.addKeyListener(new java.awt.event.KeyAdapter() {
+        buy_tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        buy_tQty.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                sell_tQtyKeyPressed(evt);
+                buy_tQtyKeyPressed(evt);
             }
         });
 
@@ -1244,7 +1259,7 @@ public class MainFrm extends javax.swing.JFrame {
                                 .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                                 .addGap(304, 304, 304))
                             .addGroup(buyPaneLayout.createSequentialGroup()
-                                .addComponent(sell_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buy_tQty, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(buy_btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(216, 216, 216))))
@@ -1274,7 +1289,7 @@ public class MainFrm extends javax.swing.JFrame {
                         .addGroup(buyPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(buy_tName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buy_btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sell_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(buy_tQty, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1680,7 +1695,8 @@ public class MainFrm extends javax.swing.JFrame {
 
     private void sell_tIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_tIdKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            sell_tId.requestFocus();
+            sellController.getMedById();
+            sell_tQty.requestFocus();
         }
     }//GEN-LAST:event_sell_tIdKeyPressed
 
@@ -1715,11 +1731,31 @@ public class MainFrm extends javax.swing.JFrame {
         reportController.getBuyYearlyReport();
     }//GEN-LAST:event_report_btnMakeYearBuyMouseClicked
 
+    private void buy_tQtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buy_tQtyKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            buyController.addRow();
+            buyController.clearInput();
+            buyController.calculateTotal();
+            buy_tId.requestFocus();
+        }
+    }//GEN-LAST:event_buy_tQtyKeyPressed
+
     private void sell_tQtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_tQtyKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
+            sellController.addRow();
+            sellController.clearInput();
+            sellController.calculateTotal();
+            sell_tId.requestFocus();
         }
     }//GEN-LAST:event_sell_tQtyKeyPressed
+
+    private void sell_tNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_tNameActionPerformed
+        sellController.getMedByName();
+    }//GEN-LAST:event_sell_tNameActionPerformed
+
+    private void buy_tNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_tNameActionPerformed
+        buyController.getMedByName();
+    }//GEN-LAST:event_buy_tNameActionPerformed
 
     /**
      * @param args the command line arguments

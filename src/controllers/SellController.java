@@ -110,7 +110,7 @@ public class SellController {
     }
     
     public void addRow(){
-        lm = tImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
+        lm = tImp.getMedById(Integer.parseInt(frame.getSell_tId().getText()));
         
         String[] data = new String[5];
         
@@ -142,6 +142,11 @@ public class SellController {
     
     public void getMedById(){
         lm = tImp.getMedById(Integer.parseInt(frame.getSell_tId().getText()));
+        
+        if(lm.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         
         frame.getSell_tName().setSelectedItem(lm.get(0).getName());
     }

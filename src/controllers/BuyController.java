@@ -114,6 +114,11 @@ public class BuyController {
     public void getMedById(){
         lm = pImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
         
+        if(lm.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
         frame.getBuy_tName().setSelectedItem(lm.get(0).getName());
     }
     
