@@ -7,6 +7,7 @@ package views;
 
 import controllers.LoginController;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -163,6 +164,11 @@ public class LoginFrm extends javax.swing.JFrame {
                 tPasswordFocusLost(evt);
             }
         });
+        tPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tPasswordKeyPressed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(17, 32, 49));
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -255,6 +261,12 @@ public class LoginFrm extends javax.swing.JFrame {
     private void tPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tPasswordFocusLost
         tPassword.setBackground(new Color(52,91,99));
     }//GEN-LAST:event_tPasswordFocusLost
+
+    private void tPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPasswordKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            loginController.login();
+        }
+    }//GEN-LAST:event_tPasswordKeyPressed
 
     /**
      * @param args the command line arguments
