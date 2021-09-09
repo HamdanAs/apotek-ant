@@ -128,7 +128,7 @@ FROM transactions inner join transaction_details on transactions.id = transactio
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Grand Total]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0;#,##0-">
 				<reportElement x="445" y="12" width="100" height="20" uuid="6522a4f4-d8e9-4a00-b86f-8e53cc7667b8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
