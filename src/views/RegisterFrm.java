@@ -5,33 +5,30 @@
  */
 package views;
 
-import controllers.LoginController;
+import controllers.RegisterController;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
  *
- * @author Gawrgura
+ * @author NESAS
  */
-public class LoginFrm extends javax.swing.JFrame {
+public class RegisterFrm extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginFrm
+     * Creates new form RegisterForm
      */
     
-    private final LoginController loginController;
-    
-    public LoginFrm() {
+    private final RegisterController registerController;
+    public RegisterFrm() {
         initComponents();
         
-        loginController = new LoginController(this);
-        
-        tUsername.setBorder(BorderFactory.createCompoundBorder(tUsername.getBorder(), BorderFactory.createEmptyBorder(0, 5, 0, 0)));
-        tPassword.setBorder(BorderFactory.createCompoundBorder(tPassword.getBorder(), BorderFactory.createEmptyBorder(0, 5, 0, 0)));
+        registerController = new RegisterController(this);
+    }
+
+    public JPasswordField gettConfirmPassword() {
+        return tConfirmPassword;
     }
 
     public JPasswordField gettPassword() {
@@ -41,6 +38,8 @@ public class LoginFrm extends javax.swing.JFrame {
     public JTextField gettUsername() {
         return tUsername;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,9 +61,11 @@ public class LoginFrm extends javax.swing.JFrame {
         tUsername = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tPassword = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        tConfirmPassword = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,7 +129,7 @@ public class LoginFrm extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(212, 236, 221));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Login");
+        jLabel9.setText("Register");
 
         jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(212, 236, 221));
@@ -170,21 +171,6 @@ public class LoginFrm extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setBackground(new java.awt.Color(17, 32, 49));
-        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
-            }
-        });
-        btnLogin.setLayout(new java.awt.BorderLayout());
-
-        jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(212, 236, 221));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Login");
-        btnLogin.add(jLabel2, java.awt.BorderLayout.CENTER);
-
         btnRegister.setBackground(new java.awt.Color(17, 32, 49));
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,11 +180,48 @@ public class LoginFrm extends javax.swing.JFrame {
         });
         btnRegister.setLayout(new java.awt.BorderLayout());
 
+        jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Register");
+        btnRegister.add(jLabel2, java.awt.BorderLayout.CENTER);
+
+        jLabel13.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel13.setText("Konfirmasi Password");
+
+        tConfirmPassword.setBackground(new java.awt.Color(52, 91, 99));
+        tConfirmPassword.setForeground(new java.awt.Color(212, 236, 221));
+        tConfirmPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(212, 236, 221)));
+        tConfirmPassword.setCaretColor(new java.awt.Color(212, 236, 221));
+        tConfirmPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tConfirmPasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tConfirmPasswordFocusLost(evt);
+            }
+        });
+        tConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tConfirmPasswordKeyPressed(evt);
+            }
+        });
+
+        btnLogin.setBackground(new java.awt.Color(17, 32, 49));
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+        });
+        btnLogin.setLayout(new java.awt.BorderLayout());
+
         jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(212, 236, 221));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Register");
-        btnRegister.add(jLabel4, java.awt.BorderLayout.CENTER);
+        jLabel4.setText("Login");
+        btnLogin.add(jLabel4, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -206,17 +229,20 @@ public class LoginFrm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10))
+                        .addComponent(jLabel13)
                         .addComponent(jLabel11)
                         .addComponent(jLabel10)
-                        .addComponent(tPassword)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                        .addComponent(tUsername))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tPassword)
+                    .addComponent(tConfirmPassword))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -232,11 +258,15 @@ public class LoginFrm extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(124, Short.MAX_VALUE))
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 300, 410));
@@ -244,21 +274,12 @@ public class LoginFrm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    private int x, y;
-    
-    private void tUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tUsernameFocusGained
-        tUsername.setBackground(new Color(51,69,99));
-    }//GEN-LAST:event_tUsernameFocusGained
 
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        loginController.login();
-    }//GEN-LAST:event_btnLoginMouseClicked
-
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
+    int x, y;
+    
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btnCloseMouseClicked
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int xx = evt.getXOnScreen();
@@ -266,9 +287,14 @@ public class LoginFrm extends javax.swing.JFrame {
         this.setLocation(xx - x, yy - y);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btnCloseMouseClicked
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void tUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tUsernameFocusGained
+        tUsername.setBackground(new Color(51,69,99));
+    }//GEN-LAST:event_tUsernameFocusGained
 
     private void tUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tUsernameFocusLost
         tUsername.setBackground(new Color(52,91,99));
@@ -283,15 +309,31 @@ public class LoginFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_tPasswordFocusLost
 
     private void tPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPasswordKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            loginController.login();
-        }
+//        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+//            loginController.login();
+//        }
     }//GEN-LAST:event_tPasswordKeyPressed
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
-        new RegisterFrm().setVisible(true);
-        this.dispose();
+        registerController.register();
     }//GEN-LAST:event_btnRegisterMouseClicked
+
+    private void tConfirmPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tConfirmPasswordFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tConfirmPasswordFocusGained
+
+    private void tConfirmPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tConfirmPasswordFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tConfirmPasswordFocusLost
+
+    private void tConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tConfirmPasswordKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tConfirmPasswordKeyPressed
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        new LoginFrm().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -310,20 +352,21 @@ public class LoginFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginFrm().setVisible(true);
+                new RegisterFrm().setVisible(true);
             }
         });
     }
@@ -336,12 +379,14 @@ public class LoginFrm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField tConfirmPassword;
     private javax.swing.JPasswordField tPassword;
     private javax.swing.JTextField tUsername;
     // End of variables declaration//GEN-END:variables
