@@ -7,8 +7,11 @@ package views;
 
 import controllers.RegisterController;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import utilities.Colors;
+import utilities.Input;
 
 /**
  *
@@ -148,6 +151,11 @@ public class RegisterFrm extends javax.swing.JFrame {
                 tUsernameFocusLost(evt);
             }
         });
+        tUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tUsernameKeyReleased(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(212, 236, 221));
@@ -169,13 +177,35 @@ public class RegisterFrm extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tPasswordKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tPasswordKeyReleased(evt);
+            }
         });
 
         btnRegister.setBackground(new java.awt.Color(17, 32, 49));
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegister.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnRegisterFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnRegisterFocusLost(evt);
+            }
+        });
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegisterMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegisterMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegisterMouseExited(evt);
+            }
+        });
+        btnRegister.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnRegisterKeyReleased(evt);
             }
         });
         btnRegister.setLayout(new java.awt.BorderLayout());
@@ -206,13 +236,38 @@ public class RegisterFrm extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tConfirmPasswordKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tConfirmPasswordKeyReleased(evt);
+            }
         });
 
         btnLogin.setBackground(new java.awt.Color(17, 32, 49));
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnLoginFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnLoginFocusLost(evt);
+            }
+        });
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoginMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLoginMouseExited(evt);
+            }
+        });
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnLoginKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnLoginKeyTyped(evt);
             }
         });
         btnLogin.setLayout(new java.awt.BorderLayout());
@@ -231,18 +286,19 @@ public class RegisterFrm extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10))
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel11)
-                        .addComponent(jLabel10)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tPassword)
-                    .addComponent(tConfirmPassword))
+                    .addComponent(tConfirmPassword)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -319,11 +375,11 @@ public class RegisterFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void tConfirmPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tConfirmPasswordFocusGained
-        // TODO add your handling code here:
+        tConfirmPassword.setBackground(Colors.HOVER_COLOR);
     }//GEN-LAST:event_tConfirmPasswordFocusGained
 
     private void tConfirmPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tConfirmPasswordFocusLost
-        // TODO add your handling code here:
+        tConfirmPassword.setBackground(Colors.SECONDARY_COLOR);
     }//GEN-LAST:event_tConfirmPasswordFocusLost
 
     private void tConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tConfirmPasswordKeyPressed
@@ -334,6 +390,75 @@ public class RegisterFrm extends javax.swing.JFrame {
         new LoginFrm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void tUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tUsernameKeyReleased
+        Input.moveCursor(evt, tPassword, new int[]{KeyEvent.VK_ENTER, KeyEvent.VK_DOWN});
+    }//GEN-LAST:event_tUsernameKeyReleased
+
+    private void tPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPasswordKeyReleased
+        Input.moveCursor(evt, tConfirmPassword, new int[]{KeyEvent.VK_ENTER, KeyEvent.VK_DOWN});
+        Input.moveCursor(evt, tUsername, KeyEvent.VK_UP);
+    }//GEN-LAST:event_tPasswordKeyReleased
+
+    private void tConfirmPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tConfirmPasswordKeyReleased
+        Input.moveCursor(evt, btnRegister, new int[]{KeyEvent.VK_ENTER, KeyEvent.VK_DOWN});
+        Input.moveCursor(evt, tPassword, KeyEvent.VK_UP);
+    }//GEN-LAST:event_tConfirmPasswordKeyReleased
+
+    private void btnRegisterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnRegisterFocusGained
+        btnRegister.setBackground(Colors.HOVER_COLOR);
+    }//GEN-LAST:event_btnRegisterFocusGained
+
+    private void btnRegisterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnRegisterFocusLost
+        btnRegister.setBackground(Colors.MAIN_COLOR);
+    }//GEN-LAST:event_btnRegisterFocusLost
+
+    private void btnRegisterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseEntered
+        btnRegisterFocusGained(null);
+    }//GEN-LAST:event_btnRegisterMouseEntered
+
+    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
+        btnLoginFocusGained(null);
+    }//GEN-LAST:event_btnLoginMouseEntered
+
+    private void btnRegisterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseExited
+        btnRegisterFocusLost(null);
+    }//GEN-LAST:event_btnRegisterMouseExited
+
+    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
+        btnLoginFocusLost(null);
+    }//GEN-LAST:event_btnLoginMouseExited
+
+    private void btnLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLoginFocusGained
+        btnLogin.setBackground(Colors.HOVER_COLOR);
+    }//GEN-LAST:event_btnLoginFocusGained
+
+    private void btnLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLoginFocusLost
+        btnLogin.setBackground(Colors.MAIN_COLOR);
+    }//GEN-LAST:event_btnLoginFocusLost
+
+    private void btnRegisterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRegisterKeyReleased
+        Input.moveCursor(evt, tConfirmPassword, KeyEvent.VK_UP);
+        Input.moveCursor(evt, btnLogin, KeyEvent.VK_RIGHT);
+        Input.executeButtonClick(evt, btnRegister, KeyEvent.VK_ENTER, () -> {
+            btnRegister.setFocusable(false);
+            btnRegisterMouseClicked(null);
+            btnRegister.setFocusable(true);
+            tConfirmPassword.requestFocus();
+        });
+    }//GEN-LAST:event_btnRegisterKeyReleased
+
+    private void btnLoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoginKeyTyped
+
+    private void btnLoginKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyReleased
+        Input.moveCursor(evt, tConfirmPassword, KeyEvent.VK_UP);
+        Input.moveCursor(evt, btnRegister, KeyEvent.VK_LEFT);
+        Input.executeButtonClick(evt, btnLogin, KeyEvent.VK_ENTER, () -> {
+            btnLoginMouseClicked(null);
+        });
+    }//GEN-LAST:event_btnLoginKeyReleased
 
     /**
      * @param args the command line arguments

@@ -375,6 +375,8 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         report_SellMonth1 = new javax.swing.JComboBox<>();
         report_BuyMonth1 = new javax.swing.JComboBox<>();
+        report_btnMed = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
         changePasswordPane = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
@@ -1636,6 +1638,21 @@ public class MainFrm extends javax.swing.JFrame {
         report_BuyMonth1.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         report_BuyMonth1.setForeground(new java.awt.Color(17, 32, 49));
 
+        report_btnMed.setBackground(new java.awt.Color(17, 32, 49));
+        report_btnMed.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_btnMed.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                report_btnMedMouseClicked(evt);
+            }
+        });
+        report_btnMed.setLayout(new java.awt.BorderLayout());
+
+        jLabel49.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel49.setText("Buat Laporan Obat");
+        report_btnMed.add(jLabel49, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout reportPaneLayout = new javax.swing.GroupLayout(reportPane);
         reportPane.setLayout(reportPaneLayout);
         reportPaneLayout.setHorizontalGroup(
@@ -1673,6 +1690,10 @@ public class MainFrm extends javax.swing.JFrame {
                     .addComponent(report_btnMakeYearBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 75, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(report_btnMed, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210))
         );
         reportPaneLayout.setVerticalGroup(
             reportPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1723,7 +1744,9 @@ public class MainFrm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(report_btnMakeYearBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(report_btnMed, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         mainPane.add(reportPane, "card2");
@@ -2164,6 +2187,10 @@ public class MainFrm extends javax.swing.JFrame {
         userController.fillTable();
     }//GEN-LAST:event_user_tableMouseClicked
 
+    private void report_btnMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_report_btnMedMouseClicked
+        reportController.getMedReport();
+    }//GEN-LAST:event_report_btnMedMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2270,6 +2297,7 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2319,6 +2347,7 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JPanel report_btnMakeMonthSell;
     private javax.swing.JPanel report_btnMakeYearBuy;
     private javax.swing.JPanel report_btnMakeYearSell;
+    private javax.swing.JPanel report_btnMed;
     private javax.swing.JPanel sellIndicator;
     private javax.swing.JPanel sellPane;
     private javax.swing.JPanel sell_btnAdd;
