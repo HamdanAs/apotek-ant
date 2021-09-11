@@ -210,4 +210,15 @@ public class ReportController {
             }
         }
     }
+
+    public void getMedReport() {
+        try {
+            String jrxmlFile = "src/reports/apotek_obat.jrxml";
+            JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+            JasperPrint print = JasperFillManager.fillReport(jr, null, conn);
+            JasperViewer.viewReport(print, false);
+        } catch (JRException e){
+            System.err.println(e);
+        }
+    }
 }
