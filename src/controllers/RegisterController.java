@@ -3,11 +3,10 @@ package controllers;
 import dao.LoginDao;
 import dao.interfaces.LoginImp;
 import java.util.List;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import models.Login;
-import utilities.Validator;
+import utilities.validator.Validator;
 import views.RegisterFrm;
 
 /**
@@ -34,12 +33,12 @@ public class RegisterController {
         String username = frame.gettUsername().getText();
         String password = new String(frame.gettPassword().getPassword());
         String confirmPassword = new String(frame.gettConfirmPassword().getPassword());
+
+        Validator validator = new Validator("required", new JComponent[]{frame.gettUsername(), frame.gettPassword(), frame.gettConfirmPassword()});
         
-        Validator validator = new Validator("required", new  JTextField[]{frame.gettUsername()}, new JPasswordField[]{frame.gettPassword(), frame.gettConfirmPassword()});
+        validator.validate();
         
-        validator.validateOneRuleWithPassword();
-        
-        if(validator.isFail()){
+        if(validator.fails()){
             JOptionPane.showMessageDialog(null, "Data harus lengkap!", "Register", JOptionPane.WARNING_MESSAGE);
         } else {
             if(!password.equals(confirmPassword)){
