@@ -13,6 +13,7 @@ public class Med {
     private int Id;
     private String name;
     private String desctription;
+    private int basePrice;
     private int price;
     private int stock;
 
@@ -55,7 +56,12 @@ public class Med {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
-    
-    
+
+    public int getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(int basePrice) {
+        this.basePrice = basePrice;
+    }
 }
