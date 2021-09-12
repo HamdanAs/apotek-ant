@@ -9,6 +9,12 @@ import java.awt.event.KeyEvent;
  */
 
 public class Input{
+    public static final int ENTER = KeyEvent.VK_ENTER;
+    public static final int DOWN = KeyEvent.VK_ENTER;
+    public static final int UP = KeyEvent.VK_ENTER;
+    public static final int LEFT = KeyEvent.VK_ENTER;
+    public static final int RIGHT = KeyEvent.VK_ENTER;
+    
     public static void moveCursor(KeyEvent e, Component c, int key){
         if(e.getKeyCode() == key){
             c.requestFocus();
