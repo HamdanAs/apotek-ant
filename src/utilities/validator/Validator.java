@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 public class Validator {
     private final JComponent field;
     private final JComponent[] fields;
+    private HashMap<JComponent, String> rules;
     private final String rule;
     private boolean isFail;
     
@@ -36,7 +37,31 @@ public class Validator {
         this.field = null;
         this.fields = fields;
     }
+    
+    public Validator(HashMap<JComponent, String> rules){
+        this.rules = rules;
+        this.rule = null;
+        this.field = null;
+        this.fields = null;
+    }
 
+    public void validateHash(){
+        rules.forEach((JComponent c, String r) -> {
+            if(r.equals("required")){
+                Pattern pattern = Pattern.compile(NOT_EMPTY_REGEX);
+                Matcher matcher;
+                
+                if(isPassword(c)){
+                    matcher = pattern.matcher( new String(((JPasswordField) c).getPassword()) );
+                } else {
+                    matcher = pattern.matcher(((JTextField) c).getText());
+                }
+                
+                isFail = !matcher.find();
+            }
+        });
+    }
+    
     public void validate(){
         if(rule.equals("required")){
             checkRequired();
