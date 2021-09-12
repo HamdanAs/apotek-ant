@@ -9,7 +9,10 @@ import dao.LoginDao;
 import dao.interfaces.LoginImp;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import models.Login;
+import utilities.Validator;
 import views.LoginFrm;
 import views.MainFrm;
 
@@ -31,24 +34,25 @@ public class LoginController {
         String username = frame.gettUsername().getText();
         String password = new String(frame.gettPassword().getPassword());
         
+        Validator validator = new Validator("required", new JTextField[]{frame.gettUsername()}, new JPasswordField[]{frame.gettPassword()});
+        
         list = loginImp.getInfo(username, password);
         
-        if(list.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Username Salah!", "Login gagal", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        if(list.get(0).getUsername().equals(username) && list.get(0).getPassword().equals(password)){
-            MainFrm mainFrm = new MainFrm();
-            mainFrm.setVisible(true);
-            mainFrm.changeUsername(username);
-            mainFrm.setUsername(username);
-            mainFrm.setId(list.get(0).getId());
-            mainFrm.setLevel(list.get(0).getLevel());
-            mainFrm.checkLevel();
-            frame.dispose();
+        if(validator.isFail()){
+            JOptionPane.showMessageDialog(null, "Data tidak boleh kosong! silahkan lengkapi!", "Login gagal", JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Password salah!", "Login gagal", JOptionPane.WARNING_MESSAGE);
+            if(list.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Login Gagal! Silahkan masukan data yang benar!", "Login gagal", JOptionPane.WARNING_MESSAGE);
+            } else {
+                MainFrm mainFrm = new MainFrm();
+                mainFrm.setVisible(true);
+                mainFrm.changeUsername(username);
+                mainFrm.setUsername(username);
+                mainFrm.setId(list.get(0).getId());
+                mainFrm.setLevel(list.get(0).getLevel());
+                mainFrm.checkLevel();
+                frame.dispose();
+            }
         }
     }
 }
