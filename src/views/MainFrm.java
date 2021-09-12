@@ -19,6 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import utilities.Input;
 
 /**
  *
@@ -158,6 +159,10 @@ public class MainFrm extends javax.swing.JFrame {
         return med_tName;
     }
 
+    public JTextField getMed_tBasePrice() {
+        return med_tBasePrice;
+    }
+
     public JTextField getMed_tPrice() {
         return med_tPrice;
     }
@@ -294,7 +299,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         med_tName = new javax.swing.JTextField();
-        med_tPrice = new javax.swing.JTextField();
+        med_tBasePrice = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         med_tStock = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -314,6 +319,8 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         med_btnReset = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        med_tPrice = new javax.swing.JTextField();
         homePane = new javax.swing.JPanel();
         home_lblStatus = new javax.swing.JLabel();
         sellPane = new javax.swing.JPanel();
@@ -833,6 +840,7 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(212, 236, 221));
         jLabel9.setText("ID Obat");
 
+        med_tId.setEditable(false);
         med_tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
@@ -841,11 +849,16 @@ public class MainFrm extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(212, 236, 221));
-        jLabel15.setText("Harga Obat");
+        jLabel15.setText("Harga Beli");
 
         med_tName.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        med_tName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_tNameKeyReleased(evt);
+            }
+        });
 
-        med_tPrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        med_tBasePrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(212, 236, 221));
@@ -1013,6 +1026,12 @@ public class MainFrm extends javax.swing.JFrame {
             .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
+        jLabel50.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel50.setText("Harga Jual");
+
+        med_tPrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout medPaneLayout = new javax.swing.GroupLayout(medPane);
         medPane.setLayout(medPaneLayout);
         medPaneLayout.setHorizontalGroup(
@@ -1031,24 +1050,31 @@ public class MainFrm extends javax.swing.JFrame {
                             .addComponent(jLabel21))
                         .addGap(18, 18, 18)
                         .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(med_tSearch, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(med_tName, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(med_tPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(med_tId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(med_tStock, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(med_btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(med_btnSave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(med_btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(med_btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(med_btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(medPaneLayout.createSequentialGroup()
+                                .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(med_tSearch, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(med_tName, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(med_tId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(med_tStock, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(med_btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(med_btnSave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(med_btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(med_btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(med_btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(medPaneLayout.createSequentialGroup()
+                                .addComponent(med_tBasePrice, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel50)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(med_tPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         medPaneLayout.setVerticalGroup(
             medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1064,6 +1090,8 @@ public class MainFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
+                    .addComponent(med_tBasePrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel50)
                     .addComponent(med_tPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(medPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1987,6 +2015,7 @@ public class MainFrm extends javax.swing.JFrame {
         changePane(medPane);
         changeIndicator(medIndicator);
         lblStatus.setText("Menejemen Obat");
+        med_tName.requestFocus();
     }//GEN-LAST:event_btnMedMouseClicked
 
     private void btnSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSellMouseClicked
@@ -2021,19 +2050,16 @@ public class MainFrm extends javax.swing.JFrame {
     private void med_btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSaveMouseClicked
         medController.insert();
         medController.fillTable();
-        medController.reset();
     }//GEN-LAST:event_med_btnSaveMouseClicked
 
     private void med_btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnEditMouseClicked
         medController.update();
         medController.fillTable();
-        medController.reset();
     }//GEN-LAST:event_med_btnEditMouseClicked
 
     private void med_btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnDeleteMouseClicked
         medController.delete();
         medController.fillTable();
-        medController.reset();
     }//GEN-LAST:event_med_btnDeleteMouseClicked
 
     private void med_btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSearchMouseClicked
@@ -2191,6 +2217,10 @@ public class MainFrm extends javax.swing.JFrame {
         reportController.getMedReport();
     }//GEN-LAST:event_report_btnMedMouseClicked
 
+    private void med_tNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tNameKeyReleased
+        Input.moveCursor(evt, med_tBasePrice, new int[]{Input.DOWN, Input.ENTER});
+    }//GEN-LAST:event_med_tNameKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -2299,6 +2329,7 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2324,6 +2355,7 @@ public class MainFrm extends javax.swing.JFrame {
     private javax.swing.JPanel med_btnReset;
     private javax.swing.JPanel med_btnSave;
     private javax.swing.JPanel med_btnSearch;
+    private javax.swing.JTextField med_tBasePrice;
     private javax.swing.JTextArea med_tDescription;
     private javax.swing.JTextField med_tId;
     private javax.swing.JTextField med_tName;

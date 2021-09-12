@@ -24,8 +24,8 @@ public class MedDao implements MedImp{
     
     Connection conn;
     
-    final String insert = "insert into med values (null,?,?,?,?)";
-    final String update = "update med set name=?, description=?, price=? where id=?";
+    final String insert = "insert into med values (null,?,?,?,?,?)";
+    final String update = "update med set name=?, description=?, base_price=?, price=? where id=?";
     final String addStock = "update med set stock = stock + ? where id=?";
     final String subStock = "update med set stock = stock - ? where id=?";
     final String delete = "delete from med where id=?";
@@ -43,8 +43,9 @@ public class MedDao implements MedImp{
             stat = conn.prepareStatement(insert);
             stat.setString(1, m.getName());
             stat.setString(2, m.getDesctription());
-            stat.setInt(3, m.getPrice());
-            stat.setInt(4, 0);
+            stat.setInt(3, m.getBasePrice());
+            stat.setInt(4, m.getPrice());
+            stat.setInt(5, 0);
             stat.executeUpdate();
             
         } catch (SQLException e){
@@ -65,8 +66,9 @@ public class MedDao implements MedImp{
             stat = conn.prepareStatement(update);
             stat.setString(1, m.getName());
             stat.setString(2, m.getDesctription());
-            stat.setInt(3, m.getPrice());
-            stat.setInt(4, m.getId());
+            stat.setInt(3, m.getBasePrice());
+            stat.setInt(4, m.getPrice());
+            stat.setInt(5, m.getId());
             stat.executeUpdate();
         } catch (SQLException e){
             System.err.println(e);
@@ -147,8 +149,9 @@ public class MedDao implements MedImp{
                 m.setId(res.getInt(1));
                 m.setName(res.getString(2));
                 m.setDesctription(res.getString(3));
-                m.setPrice(res.getInt(4));
-                m.setStock(res.getInt(5));
+                m.setBasePrice(res.getInt(4));
+                m.setPrice(res.getInt(5));
+                m.setStock(res.getInt(6));
                 lm.add(m);
             }
         } catch (SQLException e){
@@ -162,7 +165,7 @@ public class MedDao implements MedImp{
     public List<Med> find(String name) {
         List<Med> lm = null;
         try {
-            lm = new ArrayList<Med>();
+            lm = new ArrayList<>();
             PreparedStatement stat = conn.prepareStatement(find);
             stat.setString(1, "%" + name + "%");
             ResultSet res = stat.executeQuery();

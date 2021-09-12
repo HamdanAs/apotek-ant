@@ -37,13 +37,13 @@ public class MedTable extends AbstractTableModel{
             case 0:
                 return "Id";
             case 1:
-                return "Name";
+                return "Nama";
             case 2:
-                return "Description";
+                return "Harga Beli";
             case 3:
-                return "Price";
+                return "Harga Jual";
             case 4:
-                return "Stock";
+                return "Stok";
             default:
                 return null;
         }
@@ -57,7 +57,7 @@ public class MedTable extends AbstractTableModel{
             case 1:
                 return lm.get(rowIndex).getName();
             case 2:
-                return lm.get(rowIndex).getDesctription();
+                return lm.get(rowIndex).getBasePrice();
             case 3:
                 return lm.get(rowIndex).getPrice();
             case 4:
