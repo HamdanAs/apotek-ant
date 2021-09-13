@@ -290,15 +290,12 @@ public class RegisterFrm extends javax.swing.JFrame {
                     .addComponent(tPassword)
                     .addComponent(tConfirmPassword)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -401,7 +398,10 @@ public class RegisterFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_tPasswordKeyReleased
 
     private void tConfirmPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tConfirmPasswordKeyReleased
-        Input.moveCursor(evt, btnRegister, new int[]{KeyEvent.VK_ENTER, KeyEvent.VK_DOWN});
+        Input.moveCursor(evt, btnRegister, new int[]{KeyEvent.VK_ENTER, KeyEvent.VK_DOWN}, () -> {
+            btnRegister.setFocusable(true);
+        });
+        
         Input.moveCursor(evt, tPassword, KeyEvent.VK_UP);
     }//GEN-LAST:event_tConfirmPasswordKeyReleased
 
@@ -443,8 +443,7 @@ public class RegisterFrm extends javax.swing.JFrame {
         Input.executeButtonClick(evt, btnRegister, KeyEvent.VK_ENTER, () -> {
             btnRegister.setFocusable(false);
             btnRegisterMouseClicked(null);
-            btnRegister.setFocusable(true);
-            tConfirmPassword.requestFocus();
+            tUsername.requestFocus();
         });
     }//GEN-LAST:event_btnRegisterKeyReleased
 

@@ -19,6 +19,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import utilities.Action;
+import utilities.Colors;
 import utilities.Input;
 
 /**
@@ -99,6 +101,14 @@ public class MainFrm extends javax.swing.JFrame {
             
             indicator.setBackground(new Color(17,32,49));
         }
+    }
+    
+    private void toHover(JPanel panel){
+        panel.setBackground(Colors.HOVER_COLOR);
+    }
+    
+    private void toMain(JPanel panel){
+        panel.setBackground(Colors.MAIN_COLOR);
     }
     
     public void changeUsername(String name){
@@ -859,6 +869,11 @@ public class MainFrm extends javax.swing.JFrame {
         });
 
         med_tBasePrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        med_tBasePrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_tBasePriceKeyReleased(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(212, 236, 221));
@@ -876,13 +891,37 @@ public class MainFrm extends javax.swing.JFrame {
         med_tDescription.setLineWrap(true);
         med_tDescription.setRows(5);
         med_tDescription.setWrapStyleWord(true);
+        med_tDescription.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_tDescriptionKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(med_tDescription);
 
         med_btnSave.setBackground(new java.awt.Color(21, 45, 53));
         med_btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        med_btnSave.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                med_btnSaveFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                med_btnSaveFocusLost(evt);
+            }
+        });
         med_btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 med_btnSaveMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                med_btnSaveMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                med_btnSaveMouseExited(evt);
+            }
+        });
+        med_btnSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_btnSaveKeyReleased(evt);
             }
         });
 
@@ -904,9 +943,28 @@ public class MainFrm extends javax.swing.JFrame {
 
         med_btnEdit.setBackground(new java.awt.Color(21, 45, 53));
         med_btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        med_btnEdit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                med_btnEditFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                med_btnEditFocusLost(evt);
+            }
+        });
         med_btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 med_btnEditMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                med_btnEditMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                med_btnEditMouseExited(evt);
+            }
+        });
+        med_btnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_btnEditKeyReleased(evt);
             }
         });
 
@@ -932,9 +990,28 @@ public class MainFrm extends javax.swing.JFrame {
 
         med_btnDelete.setBackground(new java.awt.Color(21, 45, 53));
         med_btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        med_btnDelete.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                med_btnDeleteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                med_btnDeleteFocusLost(evt);
+            }
+        });
         med_btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 med_btnDeleteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                med_btnDeleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                med_btnDeleteMouseExited(evt);
+            }
+        });
+        med_btnDelete.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_btnDeleteKeyReleased(evt);
             }
         });
 
@@ -973,6 +1050,11 @@ public class MainFrm extends javax.swing.JFrame {
         jScrollPane2.setViewportView(med_table);
 
         med_tSearch.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        med_tSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_tSearchKeyReleased(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(212, 236, 221));
@@ -980,9 +1062,31 @@ public class MainFrm extends javax.swing.JFrame {
 
         med_btnSearch.setBackground(new java.awt.Color(21, 45, 53));
         med_btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        med_btnSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                med_btnSearchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                med_btnSearchFocusLost(evt);
+            }
+        });
         med_btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 med_btnSearchMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                med_btnSearchMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                med_btnSearchMouseExited(evt);
+            }
+        });
+        med_btnSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_btnSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                med_btnSearchKeyTyped(evt);
             }
         });
 
@@ -1004,9 +1108,28 @@ public class MainFrm extends javax.swing.JFrame {
 
         med_btnReset.setBackground(new java.awt.Color(21, 45, 53));
         med_btnReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        med_btnReset.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                med_btnResetFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                med_btnResetFocusLost(evt);
+            }
+        });
         med_btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 med_btnResetMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                med_btnResetMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                med_btnResetMouseExited(evt);
+            }
+        });
+        med_btnReset.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_btnResetKeyReleased(evt);
             }
         });
 
@@ -1031,6 +1154,11 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel50.setText("Harga Jual");
 
         med_tPrice.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        med_tPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                med_tPriceKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout medPaneLayout = new javax.swing.GroupLayout(medPane);
         medPane.setLayout(medPaneLayout);
@@ -2220,6 +2348,154 @@ public class MainFrm extends javax.swing.JFrame {
     private void med_tNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tNameKeyReleased
         Input.moveCursor(evt, med_tBasePrice, new int[]{Input.DOWN, Input.ENTER});
     }//GEN-LAST:event_med_tNameKeyReleased
+
+    private void med_tBasePriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tBasePriceKeyReleased
+        Input.moveCursor(evt, med_tPrice, new int[]{Input.RIGHT, Input.ENTER});
+        Input.moveCursor(evt, med_tName, new int[]{Input.UP});
+        Input.moveCursor(evt, med_tDescription, new int[]{Input.DOWN});
+    }//GEN-LAST:event_med_tBasePriceKeyReleased
+
+    private void med_tPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tPriceKeyReleased
+        Input.moveCursor(evt, med_tBasePrice, new int[]{Input.LEFT});
+        Input.moveCursor(evt, med_tName, new int[]{Input.UP});
+        Input.moveCursor(evt, med_tDescription, new int[]{Input.DOWN, Input.ENTER});
+    }//GEN-LAST:event_med_tPriceKeyReleased
+
+    private void med_tDescriptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tDescriptionKeyReleased
+        Input.moveCursor(evt, med_btnSave, new int[]{Input.RIGHT});
+        Input.moveCursor(evt, med_tBasePrice, new int[]{Input.UP});
+        Input.moveCursor(evt, med_tSearch, new int[]{Input.DOWN});
+        Input.moveCursor(evt, med_btnSave, new int[]{Input.ENTER});
+    }//GEN-LAST:event_med_tDescriptionKeyReleased
+
+    private void med_btnSaveFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnSaveFocusGained
+        med_btnSave.setBackground(Colors.HOVER_COLOR);
+    }//GEN-LAST:event_med_btnSaveFocusGained
+
+    private void med_btnSaveFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnSaveFocusLost
+        med_btnSave.setBackground(Colors.MAIN_COLOR);
+    }//GEN-LAST:event_med_btnSaveFocusLost
+
+    private void med_btnSaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSaveKeyReleased
+        Input.moveCursor(evt, med_btnEdit, Input.RIGHT);
+        Input.moveCursor(evt, med_btnDelete, Input.DOWN);
+        Input.moveCursor(evt, med_tDescription, Input.LEFT);
+        Input.moveCursor(evt, med_tPrice, Input.UP);
+        Input.executeButtonClick(evt, med_btnSave, Input.ENTER, () -> {
+            med_btnSave.setFocusable(true);
+            med_btnSaveMouseClicked(null);
+            med_btnSave.setFocusable(false);
+            med_tName.requestFocus();
+        });
+    }//GEN-LAST:event_med_btnSaveKeyReleased
+
+    private void med_btnEditFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnEditFocusGained
+        med_btnEdit.setBackground(Colors.HOVER_COLOR);
+    }//GEN-LAST:event_med_btnEditFocusGained
+
+    private void med_btnEditFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnEditFocusLost
+        med_btnEdit.setBackground(Colors.MAIN_COLOR);
+    }//GEN-LAST:event_med_btnEditFocusLost
+
+    private void med_btnDeleteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnDeleteFocusGained
+        med_btnDelete.setBackground(Colors.HOVER_COLOR);
+    }//GEN-LAST:event_med_btnDeleteFocusGained
+
+    private void med_btnDeleteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnDeleteFocusLost
+        med_btnDelete.setBackground(Colors.MAIN_COLOR);
+    }//GEN-LAST:event_med_btnDeleteFocusLost
+
+    private void med_btnResetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnResetFocusGained
+        med_btnReset.setBackground(Colors.HOVER_COLOR);
+    }//GEN-LAST:event_med_btnResetFocusGained
+
+    private void med_btnResetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnResetFocusLost
+        med_btnReset.setBackground(Colors.MAIN_COLOR);
+    }//GEN-LAST:event_med_btnResetFocusLost
+
+    private void med_btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSaveMouseEntered
+        toHover(med_btnSave);
+    }//GEN-LAST:event_med_btnSaveMouseEntered
+
+    private void med_btnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSaveMouseExited
+        toMain(med_btnSave);
+    }//GEN-LAST:event_med_btnSaveMouseExited
+
+    private void med_btnEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnEditMouseEntered
+        toHover(med_btnEdit);
+    }//GEN-LAST:event_med_btnEditMouseEntered
+
+    private void med_btnEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnEditMouseExited
+        toMain(med_btnEdit);
+    }//GEN-LAST:event_med_btnEditMouseExited
+
+    private void med_btnDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnDeleteMouseEntered
+        toHover(med_btnDelete);
+    }//GEN-LAST:event_med_btnDeleteMouseEntered
+
+    private void med_btnDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnDeleteMouseExited
+        toMain(med_btnDelete);
+    }//GEN-LAST:event_med_btnDeleteMouseExited
+
+    private void med_btnResetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnResetMouseEntered
+        toHover(med_btnReset);
+    }//GEN-LAST:event_med_btnResetMouseEntered
+
+    private void med_btnResetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnResetMouseExited
+        toMain(med_btnReset);
+    }//GEN-LAST:event_med_btnResetMouseExited
+
+    private void med_btnEditKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnEditKeyReleased
+        Input.moveCursor(evt, med_btnSave, new int[]{Input.LEFT});
+        Input.moveCursor(evt, med_btnReset, new int[]{Input.DOWN});
+        Input.moveCursor(evt, med_tPrice, new int[]{Input.UP});
+        Input.executeButtonClick(evt, med_btnEdit, Input.ENTER, () -> {
+            med_btnEditMouseClicked(null);
+        });
+    }//GEN-LAST:event_med_btnEditKeyReleased
+
+    private void med_btnDeleteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnDeleteKeyReleased
+        Input.moveCursor(evt, med_tDescription, new int[]{Input.LEFT});
+        Input.moveCursor(evt, med_btnReset, new int[]{Input.RIGHT});
+        Input.moveCursor(evt, med_btnSave, new int[]{Input.UP});
+        Input.moveCursor(evt, med_btnSearch, new int[]{Input.DOWN});
+    }//GEN-LAST:event_med_btnDeleteKeyReleased
+
+    private void med_btnResetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnResetKeyReleased
+        Input.moveCursor(evt, med_btnDelete, new int[]{Input.LEFT});
+        Input.moveCursor(evt, med_btnEdit, new int[]{Input.UP});
+        Input.moveCursor(evt, med_btnSearch, new int[]{Input.DOWN});
+    }//GEN-LAST:event_med_btnResetKeyReleased
+
+    private void med_tSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tSearchKeyReleased
+        Input.moveCursor(evt, med_tDescription, new int[]{Input.UP});
+        Input.moveCursor(evt, med_btnSearch, new int[]{Input.RIGHT});
+    }//GEN-LAST:event_med_tSearchKeyReleased
+
+    private void med_btnSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnSearchFocusGained
+        toHover(med_btnSearch);
+    }//GEN-LAST:event_med_btnSearchFocusGained
+
+    private void med_btnSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnSearchFocusLost
+        toMain(med_btnSearch);
+    }//GEN-LAST:event_med_btnSearchFocusLost
+
+    private void med_btnSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSearchMouseEntered
+        toHover(med_btnSearch);
+    }//GEN-LAST:event_med_btnSearchMouseEntered
+
+    private void med_btnSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSearchMouseExited
+        toMain(med_btnSearch);
+    }//GEN-LAST:event_med_btnSearchMouseExited
+
+    private void med_btnSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSearchKeyTyped
+        Input.moveCursor(evt, med_btnDelete, new int[]{Input.UP});
+        Input.moveCursor(evt, med_tSearch, new int[]{Input.LEFT});
+    }//GEN-LAST:event_med_btnSearchKeyTyped
+
+    private void med_btnSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSearchKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_med_btnSearchKeyReleased
 
     /**
      * @param args the command line arguments
