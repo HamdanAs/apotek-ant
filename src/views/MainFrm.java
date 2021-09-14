@@ -2358,7 +2358,8 @@ public class MainFrm extends javax.swing.JFrame {
     private void med_tPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tPriceKeyReleased
         Input.moveCursor(evt, med_tBasePrice, new int[]{Input.LEFT});
         Input.moveCursor(evt, med_tName, new int[]{Input.UP});
-        Input.moveCursor(evt, med_tDescription, new int[]{Input.DOWN, Input.ENTER});
+        Input.moveCursor(evt, med_tDescription, new int[]{Input.ENTER});
+        Input.moveCursor(evt, med_btnSave, new int[]{Input.DOWN});
     }//GEN-LAST:event_med_tPriceKeyReleased
 
     private void med_tDescriptionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tDescriptionKeyReleased
@@ -2450,7 +2451,10 @@ public class MainFrm extends javax.swing.JFrame {
         Input.moveCursor(evt, med_btnReset, new int[]{Input.DOWN});
         Input.moveCursor(evt, med_tPrice, new int[]{Input.UP});
         Input.executeButtonClick(evt, med_btnEdit, Input.ENTER, () -> {
+            med_btnEdit.setFocusable(true);
             med_btnEditMouseClicked(null);
+            med_btnEdit.setFocusable(false);
+            med_tName.requestFocus();
         });
     }//GEN-LAST:event_med_btnEditKeyReleased
 
@@ -2459,17 +2463,35 @@ public class MainFrm extends javax.swing.JFrame {
         Input.moveCursor(evt, med_btnReset, new int[]{Input.RIGHT});
         Input.moveCursor(evt, med_btnSave, new int[]{Input.UP});
         Input.moveCursor(evt, med_btnSearch, new int[]{Input.DOWN});
+        Input.executeButtonClick(evt, med_btnDelete, Input.ENTER, () -> {
+            med_btnEdit.setFocusable(true);
+            med_btnDeleteMouseClicked(null);
+            med_btnEdit.setFocusable(false);
+            med_tName.requestFocus();
+        });
     }//GEN-LAST:event_med_btnDeleteKeyReleased
 
     private void med_btnResetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnResetKeyReleased
         Input.moveCursor(evt, med_btnDelete, new int[]{Input.LEFT});
         Input.moveCursor(evt, med_btnEdit, new int[]{Input.UP});
         Input.moveCursor(evt, med_btnSearch, new int[]{Input.DOWN});
+        Input.executeButtonClick(evt, med_btnReset, Input.ENTER, () -> {
+            med_btnReset.setFocusable(true);
+            med_btnResetMouseClicked(null);
+            med_btnReset.setFocusable(false);
+            med_tName.requestFocus();
+        });
     }//GEN-LAST:event_med_btnResetKeyReleased
 
     private void med_tSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tSearchKeyReleased
         Input.moveCursor(evt, med_tDescription, new int[]{Input.UP});
         Input.moveCursor(evt, med_btnSearch, new int[]{Input.RIGHT});
+        Input.executeButtonClick(evt, med_btnSearch, Input.ENTER, () -> {
+            med_btnSearch.setFocusable(true);
+            med_btnSearchMouseClicked(null);
+            med_btnSearch.setFocusable(false);
+            med_tSearch.requestFocus();
+        });
     }//GEN-LAST:event_med_tSearchKeyReleased
 
     private void med_btnSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnSearchFocusGained
@@ -2489,12 +2511,12 @@ public class MainFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_med_btnSearchMouseExited
 
     private void med_btnSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSearchKeyTyped
-        Input.moveCursor(evt, med_btnDelete, new int[]{Input.UP});
-        Input.moveCursor(evt, med_tSearch, new int[]{Input.LEFT});
+        
     }//GEN-LAST:event_med_btnSearchKeyTyped
 
     private void med_btnSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSearchKeyReleased
-        // TODO add your handling code here:
+        Input.moveCursor(evt, med_btnDelete, new int[]{Input.UP});
+        Input.moveCursor(evt, med_tSearch, new int[]{Input.LEFT});
     }//GEN-LAST:event_med_btnSearchKeyReleased
 
     /**
