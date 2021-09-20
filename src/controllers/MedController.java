@@ -87,36 +87,55 @@ public class MedController {
         
         validator.validateHash();
         
-        if(validator.fails()){
-            JOptionPane.showMessageDialog(null, "Nama obat, harga jual dan harga beli harus diisi\nSilahkan Lengkapi!", "Error", JOptionPane.WARNING_MESSAGE);
+        while(validator.fails()){
+            JOptionPane.showMessageDialog(frame, "Nama obat, harga jual dan harga beli harus diisi\nSilahkan Lengkapi!", "Error", JOptionPane.WARNING_MESSAGE);
+            
+            System.out.println(validator.fails());
+            
+            validator.validateHash();
+            
+            return;
+        }
+        
+        Med m = new Med();
+        m.setName(frame.getMed_tName().getText());
+        m.setDesctription(frame.getMed_tDescription().getText());
+        m.setBasePrice(Integer.parseInt(frame.getMed_tBasePrice().getText()));
+        m.setPrice(Integer.parseInt(frame.getMed_tPrice().getText()));
+
+        lm = medImp.find(frame.getMed_tName().getText());
+        
+        if(lm.isEmpty()){
+            medImp.insert(m);
+
+            JOptionPane.showMessageDialog(frame, "Data tersimpan!", "Menejemen Obat", JOptionPane.INFORMATION_MESSAGE);
+
+            reset();
+        } else {
+            if(lm.get(0).getName().equals(m.getName())){
+                JOptionPane.showMessageDialog(frame, "Nama obat sudah ada didalam database!", "Menejemen Obat", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        
+    }
+    
+    public void update(){
+        if(frame.getMed_tId().getText().equals("")){
+            JOptionPane.showMessageDialog(frame, "Silahkan pilih data!", "Menejemen Obat", JOptionPane.WARNING_MESSAGE);
         } else {
             Med m = new Med();
             m.setName(frame.getMed_tName().getText());
             m.setDesctription(frame.getMed_tDescription().getText());
             m.setBasePrice(Integer.parseInt(frame.getMed_tBasePrice().getText()));
             m.setPrice(Integer.parseInt(frame.getMed_tPrice().getText()));
-            medImp.insert(m);
-            
+            m.setId(Integer.parseInt(frame.getMed_tId().getText()));
+
+            medImp.update(m);
+
             JOptionPane.showMessageDialog(null, "Data tersimpan!", "Menejemen Obat", JOptionPane.INFORMATION_MESSAGE);
-            
+
             reset();
         }
-        
-    }
-    
-    public void update(){
-        Med m = new Med();
-        m.setName(frame.getMed_tName().getText());
-        m.setDesctription(frame.getMed_tDescription().getText());
-        m.setBasePrice(Integer.parseInt(frame.getMed_tBasePrice().getText()));
-        m.setPrice(Integer.parseInt(frame.getMed_tPrice().getText()));
-        m.setId(Integer.parseInt(frame.getMed_tId().getText()));
-        
-        medImp.update(m);
-        
-        JOptionPane.showMessageDialog(null, "Data tersimpan!", "Menejemen Obat", JOptionPane.INFORMATION_MESSAGE);
-        
-        reset();
     }
     
     public void delete(){

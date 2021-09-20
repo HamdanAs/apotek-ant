@@ -5,11 +5,13 @@
  */
 package utilities.validator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -22,9 +24,11 @@ public class Validator {
     private final JComponent[] fields;
     private HashMap<JComponent, String> rules;
     private final String rule;
-    private boolean isFail;
+    private boolean[] isFail;
+    private List<String> messages;
     
-    private final static String NOT_EMPTY_REGEX = ".*\\S.*"; 
+    private final static String NOT_EMPTY_REGEX = "^(?!\\s*$)"; 
+    private final static String ONLY_NUMBER_REGEX = "^(?!\\s*$)[0-9\\s]$";
     
     public Validator(String rule, JComponent field){
         this.rule = rule;
@@ -43,21 +47,19 @@ public class Validator {
         this.rule = null;
         this.field = null;
         this.fields = null;
+        this.messages = new ArrayList<>();
+        this.isFail = new boolean[rules.size()];
+        setBoolean();
     }
 
     public void validateHash(){
         rules.forEach((JComponent c, String r) -> {
             if(r.equals("required")){
-                Pattern pattern = Pattern.compile(NOT_EMPTY_REGEX);
-                Matcher matcher;
-                
-                if(isPassword(c)){
-                    matcher = pattern.matcher( new String(((JPasswordField) c).getPassword()) );
-                } else {
-                    matcher = pattern.matcher(((JTextField) c).getText());
-                }
-                
-                isFail = !matcher.find();
+                checkPattern(NOT_EMPTY_REGEX, c);
+                messages.add("Data tidak boleh kosong!");
+            } else if(r.equals("number")){
+                checkPattern(ONLY_NUMBER_REGEX, c);
+                messages.add("Data hanya boleh diisi dengan angka!");
             }
         });
     }
@@ -65,11 +67,42 @@ public class Validator {
     public void validate(){
         if(rule.equals("required")){
             checkRequired();
+        } else if(rule.equals("number")){
+            checkNumber();
         }
     }
     
     public boolean fails(){
-        return isFail;
+        boolean result = false;
+        
+        for(boolean f : isFail){
+            result = f != false;
+        }
+        
+        return result;
+    }
+    
+    public String getErrorMessage(){
+        String message = "";
+        
+        for(String m : messages){
+            message = message.concat(m).concat("\n");
+        }
+        
+        return message;
+    }
+    
+    private void checkPattern(String p, JComponent c){
+        Pattern pattern = Pattern.compile(p);
+        Matcher matcher;
+
+        if(isPassword(c)){
+            matcher = pattern.matcher( new String(((JPasswordField) c).getPassword()) );
+        } else {
+            matcher = pattern.matcher(((JTextField) c).getText());
+        }
+
+        addBoolean(!matcher.find()); 
     }
     
     private void checkRequired(){
@@ -85,16 +118,49 @@ public class Validator {
                     matcher = pattern.matcher(((JTextField) f).getText());
                 }
                 
-                isFail = !matcher.find(); 
+                addBoolean(!matcher.find()); 
             }
         } else {
             Matcher matcher = pattern.matcher(((JTextField) field).getText());
 
-            isFail = !matcher.find();
+            addBoolean(!matcher.find());
+        }
+    }
+    
+    private void checkNumber(){
+        Pattern pattern = Pattern.compile(ONLY_NUMBER_REGEX);
+            
+        if(field == null){
+            for(JComponent f : fields){
+                Matcher matcher;
+                
+                if(isPassword(f)){
+                    matcher = pattern.matcher( new String(((JPasswordField) f).getPassword()) );
+                } else {
+                    matcher = pattern.matcher(((JTextField) f).getText());
+                }
+                
+                addBoolean(!matcher.find()); 
+            }
+        } else {
+            Matcher matcher = pattern.matcher(((JTextField) field).getText());
+
+            addBoolean(!matcher.find());
         }
     }
     
     private boolean isPassword(JComponent c){
         return c instanceof JPasswordField;
+    }
+    
+    private void addBoolean(boolean b){
+        isFail = Arrays.copyOf(isFail, isFail.length + 1);
+        isFail[isFail.length - 1] = b;
+    }
+    
+    private void setBoolean(){
+        for(int i = 0; i < isFail.length; i++){
+            isFail[i] = false;
+        }
     }
 }

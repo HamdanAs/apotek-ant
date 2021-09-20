@@ -108,7 +108,7 @@ public class ReportController {
                 String date = frame.getReport_SellDate().getSelectedItem().toString();
                 Date newDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
                 
-                String jrxmlFile = "src/reports/laporan_penjualan_harian.jrxml";
+                String jrxmlFile = "src/reports/laporan_detail_penjualan_harian.jrxml";
                 HashMap param = new HashMap();
                 param.put("date", newDate);
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
@@ -125,8 +125,9 @@ public class ReportController {
             JOptionPane.showMessageDialog(null, "Silahkan pilih dulu bulan", "Laporan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-                String jrxmlFile = "src/reports/laporan_penjualan_bulanan.jrxml";
+                String jrxmlFile = "src/reports/laporan_detail_penjualan_bulanan.jrxml";
                 HashMap param = new HashMap();
+                param.put("imageDir", "src/reports/");
                 param.put("month", Integer.parseInt(frame.getReport_SellMonth().getSelectedItem().toString()));
                 param.put("year", Integer.parseInt(frame.getReport_SellMonth1().getSelectedItem().toString()));
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
@@ -143,7 +144,7 @@ public class ReportController {
             JOptionPane.showMessageDialog(null, "Silahkan pilih dulu tahun", "Laporan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-                String jrxmlFile = "src/reports/laporan_penjualan_tahunan.jrxml";
+                String jrxmlFile = "src/reports/laporan_detail_penjualan_tahunan.jrxml";
                 HashMap param = new HashMap();
                 param.put("year", Integer.parseInt(frame.getReport_SellYear().getSelectedItem().toString()));
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);

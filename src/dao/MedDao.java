@@ -28,7 +28,7 @@ public class MedDao implements MedImp{
     final String update = "update med set name=?, description=?, base_price=?, price=? where id=?";
     final String addStock = "update med set stock = stock + ? where id=?";
     final String subStock = "update med set stock = stock - ? where id=?";
-    final String delete = "delete from med where id=?";
+    final String delete = "delete from med where id = ?";
     final String all = "select * from med";
     final String find = "select * from med where name like ?";
     

@@ -101,15 +101,15 @@ FROM transactions right join transaction_details on transactions.id = transactio
 				<reportElement x="10" y="0" width="100" height="20" uuid="cb89fe6c-54e8-4a55-9f16-7a4763df02d1"/>
 				<textFieldExpression><![CDATA[$F{transaction_code}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="281" y="0" width="100" height="20" uuid="e6e638f2-eb2d-47c0-963f-1a6bf66e081a"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{sum(transaction_details.qty)}]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0;-#,##0">
 				<reportElement x="391" y="0" width="100" height="20" uuid="c4735cdb-9c47-4a09-970b-604dc3c3fdac"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="0" width="100" height="20" uuid="e6e638f2-eb2d-47c0-963f-1a6bf66e081a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{sum(transaction_details.qty)}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

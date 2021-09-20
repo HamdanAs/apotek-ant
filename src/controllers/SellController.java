@@ -13,6 +13,7 @@ import dao.interfaces.InvoiceImp;
 import dao.interfaces.MedImp;
 import dao.interfaces.TransDetailImp;
 import dao.interfaces.TransactionImp;
+import java.awt.Component;
 import models.Invoice;
 import models.Med;
 import models.Transaction;
@@ -21,7 +22,9 @@ import utilities.Date;
 import utilities.InvoiceCode;
 import utilities.Table;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListDataListener;
 import views.MainFrm;
 
 /**
@@ -35,7 +38,7 @@ public class SellController {
     private final InvoiceImp iImp;
     private final MedImp mImp;
     private final Table table;
-    private List<Med> lm;
+    private List<Med> lm, ls;
     
     public SellController(MainFrm frame){
         this.frame = frame;
@@ -54,12 +57,16 @@ public class SellController {
         table.textCenter(4);
     }
     
+    private Component getFrame(){
+        return frame;
+    }
+    
     public void saveTransaction(){
         Transaction t = new Transaction();
         t.setDate(Date.now());
         t.setTotal(Integer.parseInt(frame.getSell_tTotal().getText()));
         t.setTransactionCode(InvoiceCode.generate("PJ", "transaction"));
-
+        
         tImp.insert(t);
         
         for (int i = 0; i < table.getRowCount(); i++){
@@ -84,7 +91,7 @@ public class SellController {
         
         iImp.insert(i, "transaction");
         
-        JOptionPane.showMessageDialog(null, "Data telah tersimpan", "Pembayaran berhasil", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(getFrame(), "Data telah tersimpan", "Pembayaran berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void reset(){
@@ -100,13 +107,11 @@ public class SellController {
     }
     
     public void fillCombo(){
-        
         lm = tImp.getMed();
         
         lm.forEach(lm1 -> {
             frame.getSell_tName().addItem(lm1.getName());
         });
-        
     }
     
     public void addRow(){
@@ -122,7 +127,16 @@ public class SellController {
             data[4] = Integer.toString(lm1.getPrice() * Integer.parseInt(data[3]));
         });
         
-        table.addRow(data);
+        ls = mImp.find((String) frame.getSell_tName().getSelectedItem());
+        
+        System.out.println(ls.get(0).getName());
+        
+        if(ls.get(0).getStock() <= Integer.parseInt(frame.getSell_tQty().getText())){
+            JOptionPane.showMessageDialog(frame, "Stok tidak mencukupi", "Penjualan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            table.addRow(data);
+        }
+        
     }
     
     public void deleteRow(){
@@ -144,7 +158,7 @@ public class SellController {
         lm = tImp.getMedById(Integer.parseInt(frame.getSell_tId().getText()));
         
         if(lm.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(getFrame(), "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         

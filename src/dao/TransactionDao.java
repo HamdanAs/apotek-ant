@@ -64,7 +64,7 @@ public class TransactionDao implements TransactionImp{
     public List<Transaction> all() {
         List<Transaction> lt = null;
         try {
-            lt = new ArrayList<Transaction>();
+            lt = new ArrayList<>();
             Statement stat = conn.createStatement();
             ResultSet res = stat.executeQuery(all);
             while(res.next()){
@@ -85,7 +85,7 @@ public class TransactionDao implements TransactionImp{
     public List<Med> getMed() {
         List<Med> lm = null;
         try {
-            lm = new ArrayList<Med>();
+            lm = new ArrayList<>();
             Statement stat = conn.createStatement();
             ResultSet res = stat.executeQuery(med);
             while(res.next()){

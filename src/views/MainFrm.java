@@ -19,7 +19,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import utilities.Action;
 import utilities.Colors;
 import utilities.Input;
 
@@ -42,6 +41,8 @@ public class MainFrm extends javax.swing.JFrame {
     private String username;
     private int id;
     private int level;
+    private boolean isActive = true;
+    private final Object LOCK = new Object();
     
     public MainFrm() {
         initComponents();
@@ -856,6 +857,11 @@ public class MainFrm extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(212, 236, 221));
         jLabel14.setText("Nama Obat");
+        jLabel14.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jLabel14FocusGained(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(212, 236, 221));
@@ -920,6 +926,9 @@ public class MainFrm extends javax.swing.JFrame {
             }
         });
         med_btnSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                med_btnSaveKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 med_btnSaveKeyReleased(evt);
             }
@@ -2144,18 +2153,24 @@ public class MainFrm extends javax.swing.JFrame {
         changeIndicator(medIndicator);
         lblStatus.setText("Menejemen Obat");
         med_tName.requestFocus();
+        
+        medController.fillTable();
     }//GEN-LAST:event_btnMedMouseClicked
 
     private void btnSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSellMouseClicked
         changePane(sellPane);
         changeIndicator(sellIndicator);
         lblStatus.setText("Penjualan");
+        sell_tId.requestFocus();
+        
     }//GEN-LAST:event_btnSellMouseClicked
 
     private void btnBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuyMouseClicked
         changePane(buyPane);
         changeIndicator(buyIndicator);
         lblStatus.setText("Pembelian");
+        buy_tId.requestFocus();
+        
     }//GEN-LAST:event_btnBuyMouseClicked
 
     private void btnReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportMouseClicked
@@ -2178,6 +2193,9 @@ public class MainFrm extends javax.swing.JFrame {
     private void med_btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnSaveMouseClicked
         medController.insert();
         medController.fillTable();
+        
+        sellController.fillCombo();
+        buyController.fillCombo();
     }//GEN-LAST:event_med_btnSaveMouseClicked
 
     private void med_btnEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_med_btnEditMouseClicked
@@ -2346,7 +2364,8 @@ public class MainFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_report_btnMedMouseClicked
 
     private void med_tNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tNameKeyReleased
-        Input.moveCursor(evt, med_tBasePrice, new int[]{Input.DOWN, Input.ENTER});
+        if(isActive)
+            Input.moveCursor(evt, med_tBasePrice, new int[]{Input.DOWN, Input.ENTER});
     }//GEN-LAST:event_med_tNameKeyReleased
 
     private void med_tBasePriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_tBasePriceKeyReleased
@@ -2378,16 +2397,7 @@ public class MainFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_med_btnSaveFocusLost
 
     private void med_btnSaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSaveKeyReleased
-        Input.moveCursor(evt, med_btnEdit, Input.RIGHT);
-        Input.moveCursor(evt, med_btnDelete, Input.DOWN);
-        Input.moveCursor(evt, med_tDescription, Input.LEFT);
-        Input.moveCursor(evt, med_tPrice, Input.UP);
-        Input.executeButtonClick(evt, med_btnSave, Input.ENTER, () -> {
-            med_btnSave.setFocusable(true);
-            med_btnSaveMouseClicked(null);
-            med_btnSave.setFocusable(false);
-            med_tName.requestFocus();
-        });
+        
     }//GEN-LAST:event_med_btnSaveKeyReleased
 
     private void med_btnEditFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_med_btnEditFocusGained
@@ -2518,6 +2528,21 @@ public class MainFrm extends javax.swing.JFrame {
         Input.moveCursor(evt, med_btnDelete, new int[]{Input.UP});
         Input.moveCursor(evt, med_tSearch, new int[]{Input.LEFT});
     }//GEN-LAST:event_med_btnSearchKeyReleased
+
+    private void med_btnSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_med_btnSaveKeyPressed
+        Input.moveCursor(evt, med_btnEdit, Input.RIGHT);
+        Input.moveCursor(evt, med_btnDelete, Input.DOWN);
+        Input.moveCursor(evt, med_tDescription, Input.LEFT);
+        Input.moveCursor(evt, med_tPrice, Input.UP);
+        Input.executeButtonClick(evt, med_btnSave, Input.ENTER, () -> {
+            med_btnSaveMouseClicked(null);
+            jLabel14.requestFocus();
+        });
+    }//GEN-LAST:event_med_btnSaveKeyPressed
+
+    private void jLabel14FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLabel14FocusGained
+        med_tName.requestFocus();
+    }//GEN-LAST:event_jLabel14FocusGained
 
     /**
      * @param args the command line arguments
