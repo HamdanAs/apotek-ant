@@ -8,9 +8,11 @@ package utilities.validator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -28,7 +30,7 @@ public class Validator {
     private List<String> messages;
     
     private final static String NOT_EMPTY_REGEX = "^(?!\\s*$)"; 
-    private final static String ONLY_NUMBER_REGEX = "^(?!\\s*$)[0-9\\s]$";
+    private final static String ONLY_NUMBER_REGEX = "-?\\d+";
     
     public Validator(String rule, JComponent field){
         this.rule = rule;
@@ -72,20 +74,25 @@ public class Validator {
         }
     }
     
-    public boolean fails(){
-        boolean result = false;
-        
+    public boolean fails(){        
         for(boolean f : isFail){
-            result = f != false;
+            if(f == true){
+                return true;
+            }
         }
         
-        return result;
+        return false;
+    }
+    
+    public boolean[] getIsFail(){
+        return isFail;
     }
     
     public String getErrorMessage(){
         String message = "";
+        List<String> newList = messages.stream().distinct().collect(Collectors.toList());
         
-        for(String m : messages){
+        for (String m : newList) {
             message = message.concat(m).concat("\n");
         }
         

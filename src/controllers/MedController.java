@@ -7,6 +7,7 @@ package controllers;
 
 import dao.MedDao;
 import dao.interfaces.MedImp;
+import java.util.Arrays;
 import java.util.HashMap;
 import models.Med;
 import models.tables.MedTable;
@@ -82,13 +83,17 @@ public class MedController {
         rules.put(frame.getMed_tName(), "required");
         rules.put(frame.getMed_tBasePrice(), "required");
         rules.put(frame.getMed_tPrice(), "required");
+        rules.put(frame.getMed_tPrice(), "number");
+        rules.put(frame.getMed_tBasePrice(), "number");
         
         Validator validator = new Validator(rules);
         
         validator.validateHash();
         
+        System.out.println(Arrays.toString(validator.getIsFail()));
+        
         while(validator.fails()){
-            JOptionPane.showMessageDialog(frame, "Nama obat, harga jual dan harga beli harus diisi\nSilahkan Lengkapi!", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(frame, validator.getErrorMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             
             System.out.println(validator.fails());
             
