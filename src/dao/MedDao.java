@@ -174,7 +174,9 @@ public class MedDao implements MedImp{
                 m.setId(res.getInt(1));
                 m.setName(res.getString(2));
                 m.setDesctription(res.getString(3));
-                m.setPrice(res.getInt(4));
+                m.setBasePrice(res.getInt(4));
+                m.setPrice(res.getInt(5));
+                m.setStock(res.getInt(6));
                 lm.add(m);
             }
         } catch (SQLException e){
