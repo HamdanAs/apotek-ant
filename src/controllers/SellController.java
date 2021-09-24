@@ -22,9 +22,7 @@ import utilities.Date;
 import utilities.InvoiceCode;
 import utilities.Table;
 import java.util.List;
-import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListDataListener;
 import views.MainFrm;
 
 /**
@@ -115,7 +113,7 @@ public class SellController {
     }
     
     public void addRow(){
-        lm = tImp.getMedById(Integer.parseInt(frame.getSell_tId().getText()));
+        lm = tImp.getMedById(frame.getSell_tId().getText());
         
         String[] data = new String[5];
         
@@ -154,7 +152,7 @@ public class SellController {
     }
     
     public void getMedById(){
-        lm = tImp.getMedById(Integer.parseInt(frame.getSell_tId().getText()));
+        lm = tImp.getMedById(frame.getSell_tId().getText());
         
         if(lm.isEmpty()){
             JOptionPane.showMessageDialog(getFrame(), "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
@@ -167,6 +165,13 @@ public class SellController {
     public void getMedByName(){
         lm = tImp.getMedByName((String) frame.getSell_tName().getSelectedItem());
         
+        if(lm.isEmpty()){
+            JOptionPane.showMessageDialog(getFrame(), "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        frame.getSell_tName().setSelectedItem(lm.get(0).getName());
+        frame.getSell_tStock().setText(Integer.toString(lm.get(0).getStock()));
         frame.getSell_tId().setText(Integer.toString(lm.get(0).getId()));
     }
 }
