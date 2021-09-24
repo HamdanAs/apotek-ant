@@ -9,8 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -29,12 +31,15 @@ public class ReportController {
     private final ReportImp reportImp;
     private final Connection conn;
     private List<String> listSell;
+    private final Locale id;
     
     public ReportController(MainFrm frame){
         this.frame = frame;
         this.conn = Database.connection();
         
         reportImp = new ReportDao();
+        
+        id = new Locale("in", "ID");
     }
     
     public void setSellDate(){
@@ -110,6 +115,8 @@ public class ReportController {
                 
                 String jrxmlFile = "src/reports/laporan_detail_penjualan_harian.jrxml";
                 HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
+                param.put("imageDir", "src/reports/");
                 param.put("date", newDate);
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
                 JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
@@ -127,6 +134,7 @@ public class ReportController {
             try {
                 String jrxmlFile = "src/reports/laporan_detail_penjualan_bulanan.jrxml";
                 HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
                 param.put("imageDir", "src/reports/");
                 param.put("month", Integer.parseInt(frame.getReport_SellMonth().getSelectedItem().toString()));
                 param.put("year", Integer.parseInt(frame.getReport_SellMonth1().getSelectedItem().toString()));
@@ -146,6 +154,8 @@ public class ReportController {
             try {
                 String jrxmlFile = "src/reports/laporan_detail_penjualan_tahunan.jrxml";
                 HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
+                param.put("imageDir", "src/reports/");
                 param.put("year", Integer.parseInt(frame.getReport_SellYear().getSelectedItem().toString()));
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
                 JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
@@ -214,9 +224,12 @@ public class ReportController {
 
     public void getMedReport() {
         try {
-            String jrxmlFile = "src/reports/apotek_obat.jrxml";
+            String jrxmlFile = "src/reports/laporan_obat.jrxml";
+            HashMap param = new HashMap();
+            param.put("imageDir", "src/reports/");
+            param.put(JRParameter.REPORT_LOCALE, id);
             JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
-            JasperPrint print = JasperFillManager.fillReport(jr, null, conn);
+            JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
             JasperViewer.viewReport(print, false);
         } catch (JRException e){
             System.err.println(e);

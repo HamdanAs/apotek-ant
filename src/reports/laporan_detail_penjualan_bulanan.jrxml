@@ -15,6 +15,7 @@
 	</style>
 	<parameter name="month" class="java.lang.Integer"/>
 	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="imageDir" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select 
  transactions.date, 
@@ -83,6 +84,14 @@ where
 						</textElement>
 						<textFieldExpression><![CDATA[$F{transaction_code}]]></textFieldExpression>
 					</textField>
+					<textField pattern="MMMMM yyyy" isBlankWhenNull="false">
+						<reportElement mode="Transparent" x="455" y="0" width="100" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="9e9071d9-2047-4c20-a4e5-e4a2ffe5104b"/>
+						<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+							<font fontName="Times New Roman" size="18" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+							<paragraph lineSpacing="Single"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+					</textField>
 				</frame>
 				<staticText>
 					<reportElement x="19" y="43" width="100" height="20" uuid="c5513203-362f-41b2-93bd-191b5ea666e7"/>
@@ -125,14 +134,14 @@ where
 						</textElement>
 						<text><![CDATA[Grand Total]]></text>
 					</staticText>
-					<textField pattern="#,##0">
+					<textField pattern="¤ #,##0">
 						<reportElement x="351" y="0" width="83" height="24" forecolor="#FFFFFF" uuid="135ad46f-81c9-4d1c-830d-d0fb8e0ac609"/>
 						<textElement verticalAlignment="Middle">
 							<font size="13"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 					</textField>
-					<textField pattern="#,##0">
+					<textField pattern="¤ #,##0">
 						<reportElement x="434" y="0" width="100" height="24" forecolor="#FFFFFF" uuid="b5f7877d-f238-4fa9-9601-1d32becbbe93"/>
 						<textElement verticalAlignment="Middle">
 							<font size="13"/>
@@ -150,23 +159,23 @@ where
 		<band height="132" splitType="Stretch">
 			<image>
 				<reportElement x="456" y="0" width="99" height="132" uuid="78704fd8-438a-4497-ac33-b77d2d6d440e"/>
-				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{imageDir}+"cherry.jpg"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="0951ea97-e3fe-4c1d-be18-fbf71ccb437a"/>
 				<staticText>
 					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="da9a92e5-3f3b-4dfb-831b-a7ba36625e10"/>
 					<textElement>
-						<font isBold="false"/>
+						<font size="44" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry Title]]></text>
+					<text><![CDATA[Laporan Transaksi]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="d979deb2-6081-49e1-9275-97e45cd54c6b"/>
 					<textElement>
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry SubTitle]]></text>
+					<text><![CDATA[Penjualan Bulanan]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -196,12 +205,12 @@ where
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="¤ #,##0">
 					<reportElement x="119" y="0" width="100" height="20" uuid="65a4d292-ac91-4f87-9b4b-2fb8182263cb"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{base_price}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="¤ #,##0">
 					<reportElement x="219" y="0" width="100" height="20" uuid="be581bf0-c70e-4078-bfe8-216a21d4c6ad"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
@@ -211,12 +220,12 @@ where
 					<textElement textAlignment="Left" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="¤ #,##0">
 					<reportElement x="433" y="0" width="100" height="20" uuid="a7c8f227-4619-471e-b3f1-16a60907c643"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{profit} * $F{qty}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="¤ #,##0">
 					<reportElement x="351" y="0" width="82" height="20" uuid="b881b5c4-37cd-4492-aa9c-0f9ec3fb9bd0"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
@@ -281,7 +290,7 @@ where
 				</textElement>
 				<text><![CDATA[Total Penjualan]]></text>
 			</staticText>
-			<textField pattern="#,##0">
+			<textField pattern="¤ #,##0">
 				<reportElement x="370" y="50" width="100" height="20" uuid="3bc08686-abbf-4c45-abb6-b97326ce9c91"/>
 				<textElement>
 					<font size="12"/>
@@ -309,7 +318,7 @@ where
 				</textElement>
 				<text><![CDATA[Total Pendapatan]]></text>
 			</staticText>
-			<textField pattern="#,##0">
+			<textField pattern="¤ #,##0">
 				<reportElement x="370" y="90" width="100" height="20" uuid="26bb4b6d-787a-474a-af39-eea3b4bed5a2"/>
 				<textElement>
 					<font size="12"/>
