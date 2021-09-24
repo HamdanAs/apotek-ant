@@ -112,7 +112,19 @@ public class BuyController {
     }
     
     public void getMedById(){
-        lm = pImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
+        lm = pImp.getMedById(frame.getBuy_tId().getText());
+        
+        if(lm.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        frame.getBuy_tStock().setText(Integer.toString(lm.get(0).getStock()));
+        frame.getBuy_tName().setSelectedItem(lm.get(0).getName());
+    }
+    
+    public void getMedByName(){
+        lm = pImp.getMedByName((String) frame.getBuy_tName().getSelectedItem());
         
         if(lm.isEmpty()){
             JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
@@ -120,16 +132,12 @@ public class BuyController {
         }
         
         frame.getBuy_tName().setSelectedItem(lm.get(0).getName());
-    }
-    
-    public void getMedByName(){
-        lm = pImp.getMedByName((String) frame.getBuy_tName().getSelectedItem());
-        
+        frame.getBuy_tStock().setText(Integer.toString(lm.get(0).getStock()));
         frame.getBuy_tId().setText(Integer.toString(lm.get(0).getId()));
     }
     
     public void addRow(){
-        lm = pImp.getMedById(Integer.parseInt(frame.getBuy_tId().getText()));
+        lm = pImp.getMedById(frame.getBuy_tId().getText());
         
         String[] data = new String[5];
         
@@ -141,7 +149,14 @@ public class BuyController {
             data[4] = Integer.toString(lm1.getPrice() * Integer.parseInt(data[3]));
         });
         
-        table.addRow(data);
+        List<Med> ls = mImp.find((String) frame.getBuy_tName().getSelectedItem());
+        
+        if(ls.get(0).getStock() < Integer.parseInt(frame.getBuy_tQty().getText())){
+            JOptionPane.showMessageDialog(frame, "Stok tidak mencukupi", "Penjualan", JOptionPane.WARNING_MESSAGE);
+            frame.getBuy_tQty().requestFocus();
+        } else {
+            table.addRow(data);
+        }
     }
     
     public void deleteRow(){

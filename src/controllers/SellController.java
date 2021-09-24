@@ -128,8 +128,8 @@ public class SellController {
         ls = mImp.find((String) frame.getSell_tName().getSelectedItem());
         
         if(ls.get(0).getStock() < Integer.parseInt(frame.getSell_tQty().getText())){
-            
             JOptionPane.showMessageDialog(frame, "Stok tidak mencukupi", "Penjualan", JOptionPane.WARNING_MESSAGE);
+            frame.getSell_tQty().requestFocus();
         } else {
             table.addRow(data);
         }

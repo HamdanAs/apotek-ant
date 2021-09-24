@@ -27,8 +27,8 @@ public class PurchaseDao implements PurchaseImp{
     final String insert = "insert into purchases values (null, ?,?,?)";
     final String all = "select * from purchases";
     final String med = "select * from med";
-    final String medByName = "select * from med where name=?";
-    final String medById = "select * from med where id=?";
+    final String medByName = "select * from med where name like ?";
+    final String medById = "select * from med where id like ?";
     
     public PurchaseDao(){
         conn = Database.connection();
@@ -107,14 +107,16 @@ public class PurchaseDao implements PurchaseImp{
         try {
             lm = new ArrayList<>();
             PreparedStatement stat = conn.prepareStatement(medByName);
-            stat.setString(1, name);
+            stat.setString(1, "%" + name + "%");
             ResultSet res = stat.executeQuery();
             while(res.next()){
                 Med m = new Med();
                 m.setId(res.getInt(1));
                 m.setName(res.getString(2));
                 m.setDesctription(res.getString(3));
-                m.setPrice(res.getInt(4));
+                m.setBasePrice(res.getInt(4));
+                m.setPrice(res.getInt(5));
+                m.setStock(res.getInt(6));
                 lm.add(m);
             }
         } catch (SQLException e){
@@ -125,19 +127,21 @@ public class PurchaseDao implements PurchaseImp{
     }
 
     @Override
-    public List<Med> getMedById(int id) {
+    public List<Med> getMedById(String id) {
         List<Med> lm = null;
         try {
             lm = new ArrayList<>();
             PreparedStatement stat = conn.prepareStatement(medById);
-            stat.setInt(1, id);
+            stat.setString(1, "%" + id + "%");
             ResultSet res = stat.executeQuery();
             while(res.next()){
                 Med m = new Med();
                 m.setId(res.getInt(1));
                 m.setName(res.getString(2));
                 m.setDesctription(res.getString(3));
-                m.setPrice(res.getInt(4));
+                m.setBasePrice(res.getInt(4));
+                m.setPrice(res.getInt(5));
+                m.setStock(res.getInt(6));
                 lm.add(m);
             }
         } catch (SQLException e){
