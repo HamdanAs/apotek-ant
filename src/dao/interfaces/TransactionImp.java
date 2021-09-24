@@ -17,7 +17,7 @@ public interface TransactionImp {
     public void insert(Transaction t);
     public List<Med> getMed();
     public List<Med> getMedByName(String name);
-    public List<Med> getMedById(int id);
+    public List<Med> getMedById(String id);
     public List<Transaction> all();
     
 }
