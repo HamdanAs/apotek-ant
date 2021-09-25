@@ -175,8 +175,10 @@ public class ReportController {
                 String date = frame.getReport_BuyDate().getSelectedItem().toString();
                 Date newDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
                 
-                String jrxmlFile = "src/reports/laporan_pembelian_harian.jrxml";
+                String jrxmlFile = "src/reports/laporan_detail_pembelian_harian.jrxml";
                 HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
+                param.put("imageDir", "src/reports/");
                 param.put("date", newDate);
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
                 JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
@@ -192,8 +194,10 @@ public class ReportController {
             JOptionPane.showMessageDialog(null, "Silahkan pilih dulu bulan", "Laporan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-                String jrxmlFile = "src/reports/laporan_pembelian_bulanan.jrxml";
+                String jrxmlFile = "src/reports/laporan_detail_pembelian_bulanan.jrxml";
                 HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
+                param.put("imageDir", "src/reports/");
                 param.put("month", Integer.parseInt(frame.getReport_BuyMonth().getSelectedItem().toString()));
                 param.put("year", Integer.parseInt(frame.getReport_BuyMonth1().getSelectedItem().toString()));
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
@@ -210,8 +214,10 @@ public class ReportController {
             JOptionPane.showMessageDialog(null, "Silahkan pilih dulu tahun", "Laporan", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-                String jrxmlFile = "src/reports/laporan_pembelian_tahunan.jrxml";
+                String jrxmlFile = "src/reports/laporan_detail_pembelian_tahunan.jrxml";
                 HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
+                param.put("imageDir", "src/reports/");
                 param.put("year", Integer.parseInt(frame.getReport_BuyYear().getSelectedItem().toString()));
                 JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
                 JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
