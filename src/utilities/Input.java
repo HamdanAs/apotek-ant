@@ -38,6 +38,13 @@ public class Input{
         }
     }
     
+    public static void moveCursor(KeyEvent e, Component c, int key, Action a){
+        if(e.getKeyCode() == key){
+            a.method();
+            c.requestFocus();
+        }
+    }
+    
     public static void executeAction(KeyEvent e, int key, Action a){
         if(e.getKeyCode() == key){
             a.method();
