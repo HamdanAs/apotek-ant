@@ -22,8 +22,6 @@ public class Apotek_ant {
      */
     public static void main(String[] args) {
         new LoginFrm().setVisible(true);
-//        new TambahObat().setVisible(true);
-
     }
     
 }
