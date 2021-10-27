@@ -471,7 +471,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuyReturnMouseClicked
 
     private void btnSuppilerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuppilerMouseClicked
-        new Supplier().setVisible(true);
+        new SupplierView().setVisible(true);
     }//GEN-LAST:event_btnSuppilerMouseClicked
 
     /**
