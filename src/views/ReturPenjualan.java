@@ -181,7 +181,7 @@ public class ReturPenjualan extends javax.swing.JFrame {
 
         tQty.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
 
-        btnTambah.setBackground(new java.awt.Color(52, 91, 99));
+        btnTambah.setBackground(new java.awt.Color(255, 176, 133));
         btnTambah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTambahMouseClicked(evt);
@@ -190,7 +190,7 @@ public class ReturPenjualan extends javax.swing.JFrame {
         btnTambah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Tambah");
         btnTambah.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
@@ -226,7 +226,7 @@ public class ReturPenjualan extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Bayar");
 
-        btnSimpan.setBackground(new java.awt.Color(52, 91, 99));
+        btnSimpan.setBackground(new java.awt.Color(255, 176, 133));
         btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSimpanMouseClicked(evt);
@@ -235,7 +235,7 @@ public class ReturPenjualan extends javax.swing.JFrame {
         btnSimpan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Simpan");
         btnSimpan.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 32));
