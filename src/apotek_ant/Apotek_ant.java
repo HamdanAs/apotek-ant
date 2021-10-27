@@ -5,11 +5,7 @@
  */
 package apotek_ant;
 
-import dao.SupplierDao;
-import dao.interfaces.SupplierImp;
-import models.Supplier;
 import views.LoginFrm;
-import views.TambahObat;
 
 /**
  *
