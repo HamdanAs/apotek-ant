@@ -58,9 +58,8 @@ public class LoginFrm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnClose = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -78,7 +77,7 @@ public class LoginFrm extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(579, 410));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(17, 32, 49));
+        jPanel1.setBackground(new java.awt.Color(249, 213, 167));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -90,23 +89,21 @@ public class LoginFrm extends javax.swing.JFrame {
             }
         });
 
-        btnClose.setBackground(new java.awt.Color(17, 32, 49));
-        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseMouseClicked(evt);
-            }
-        });
-        btnClose.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/Vector(2).png"))); // NOI18N
-        btnClose.add(jLabel1, java.awt.BorderLayout.CENTER);
-
         jLabel12.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Aplikasi Apotek");
+
+        jLabel1.setFont(new java.awt.Font("Poppins ExtraBold", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(16, 170, 203));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("X");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,14 +111,16 @@ public class LoginFrm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-            .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 30));
@@ -129,22 +128,22 @@ public class LoginFrm extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/am-jd-oqyv1-yzkzq-unsplash(1).jpg"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 24, 285, 420));
 
-        jPanel2.setBackground(new java.awt.Color(52, 91, 99));
+        jPanel2.setBackground(new java.awt.Color(254, 241, 230));
 
         jLabel9.setFont(new java.awt.Font("Poppins SemiBold", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Login");
 
         jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Username");
 
-        tUsername.setBackground(new java.awt.Color(52, 91, 99));
+        tUsername.setBackground(new java.awt.Color(254, 241, 230));
         tUsername.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        tUsername.setForeground(new java.awt.Color(212, 236, 221));
-        tUsername.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(212, 236, 221)));
-        tUsername.setCaretColor(new java.awt.Color(212, 236, 221));
+        tUsername.setForeground(new java.awt.Color(102, 102, 102));
+        tUsername.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        tUsername.setCaretColor(new java.awt.Color(102, 102, 102));
         tUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tUsernameFocusGained(evt);
@@ -160,13 +159,13 @@ public class LoginFrm extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Password");
 
-        tPassword.setBackground(new java.awt.Color(52, 91, 99));
-        tPassword.setForeground(new java.awt.Color(212, 236, 221));
-        tPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(212, 236, 221)));
-        tPassword.setCaretColor(new java.awt.Color(212, 236, 221));
+        tPassword.setBackground(new java.awt.Color(254, 241, 230));
+        tPassword.setForeground(new java.awt.Color(102, 102, 102));
+        tPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        tPassword.setCaretColor(new java.awt.Color(102, 102, 102));
         tPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tPasswordFocusGained(evt);
@@ -181,7 +180,7 @@ public class LoginFrm extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setBackground(new java.awt.Color(17, 32, 49));
+        btnLogin.setBackground(new java.awt.Color(255, 176, 133));
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -210,12 +209,12 @@ public class LoginFrm extends javax.swing.JFrame {
         btnLogin.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Login");
         btnLogin.add(jLabel2, java.awt.BorderLayout.CENTER);
 
-        btnRegister.setBackground(new java.awt.Color(17, 32, 49));
+        btnRegister.setBackground(new java.awt.Color(255, 176, 133));
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegister.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -244,7 +243,7 @@ public class LoginFrm extends javax.swing.JFrame {
         btnRegister.setLayout(new java.awt.BorderLayout());
 
         jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(212, 236, 221));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Register");
         btnRegister.add(jLabel4, java.awt.BorderLayout.CENTER);
@@ -297,7 +296,7 @@ public class LoginFrm extends javax.swing.JFrame {
     private int x, y;
     
     private void tUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tUsernameFocusGained
-        tUsername.setBackground(new Color(51,69,99));
+        
     }//GEN-LAST:event_tUsernameFocusGained
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
@@ -315,20 +314,16 @@ public class LoginFrm extends javax.swing.JFrame {
         this.setLocation(xx - x, yy - y);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btnCloseMouseClicked
-
     private void tUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tUsernameFocusLost
-        tUsername.setBackground(new Color(52,91,99));
+        
     }//GEN-LAST:event_tUsernameFocusLost
 
     private void tPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tPasswordFocusGained
-        tPassword.setBackground(new Color(51,69,99));
+        
     }//GEN-LAST:event_tPasswordFocusGained
 
     private void tPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tPasswordFocusLost
-        tPassword.setBackground(new Color(52,91,99));
+        
     }//GEN-LAST:event_tPasswordFocusLost
 
     private void tPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPasswordKeyPressed
@@ -351,7 +346,7 @@ public class LoginFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginMouseEntered
 
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
-        btnLogin.setBackground(Colors.MAIN_COLOR);
+        btnLogin.setBackground(Colors.BUTTON_COLOR);
     }//GEN-LAST:event_btnLoginMouseExited
 
     private void btnLoginKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyReleased
@@ -377,7 +372,7 @@ public class LoginFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterMouseEntered
 
     private void btnRegisterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseExited
-        btnRegister.setBackground(Colors.MAIN_COLOR);
+        btnRegister.setBackground(Colors.BUTTON_COLOR);
     }//GEN-LAST:event_btnRegisterMouseExited
 
     private void btnLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLoginFocusGained
@@ -385,7 +380,7 @@ public class LoginFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginFocusGained
 
     private void btnLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnLoginFocusLost
-        btnLogin.setBackground(Colors.MAIN_COLOR);
+        btnLogin.setBackground(Colors.BUTTON_COLOR);
     }//GEN-LAST:event_btnLoginFocusLost
 
     private void btnRegisterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnRegisterFocusGained
@@ -393,8 +388,12 @@ public class LoginFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterFocusGained
 
     private void btnRegisterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnRegisterFocusLost
-        btnRegister.setBackground(Colors.MAIN_COLOR);
+        btnRegister.setBackground(Colors.BUTTON_COLOR);
     }//GEN-LAST:event_btnRegisterFocusLost
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -430,7 +429,6 @@ public class LoginFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnClose;
     private javax.swing.JPanel btnLogin;
     private javax.swing.JPanel btnRegister;
     private javax.swing.JLabel jLabel1;
