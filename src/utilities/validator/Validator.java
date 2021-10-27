@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -105,6 +106,8 @@ public class Validator {
 
         if(isPassword(c)){
             matcher = pattern.matcher( new String(((JPasswordField) c).getPassword()) );
+        } else if(isTextArea(c)){
+            matcher = pattern.matcher( ((JTextArea) c).getText() ); 
         } else {
             matcher = pattern.matcher(((JTextField) c).getText());
         }
@@ -121,6 +124,8 @@ public class Validator {
                 
                 if(isPassword(f)){
                     matcher = pattern.matcher( new String(((JPasswordField) f).getPassword()) );
+                } else if(isTextArea(f)){
+                    matcher = pattern.matcher( ((JTextArea) f).getText() ); 
                 } else {
                     matcher = pattern.matcher(((JTextField) f).getText());
                 }
@@ -158,6 +163,10 @@ public class Validator {
     
     private boolean isPassword(JComponent c){
         return c instanceof JPasswordField;
+    }
+    
+    private boolean isTextArea(JComponent c){
+        return c instanceof JTextArea;
     }
     
     private void addBoolean(boolean b){
