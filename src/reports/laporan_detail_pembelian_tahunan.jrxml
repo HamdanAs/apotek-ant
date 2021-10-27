@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b873ca52-3c7d-44dc-bfd2-3b3630b9ac73">
-	<property name="ireport.zoom" value="1.7715610000000048"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.210000000000003"/>
+	<property name="ireport.x" value="104"/>
+	<property name="ireport.y" value="64"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -62,13 +62,16 @@ where
 		<variableExpression><![CDATA[$F{qty}]]></variableExpression>
 	</variable>
 	<variable name="total" class="java.lang.Double">
-		<variableExpression><![CDATA[$F{price} * $F{qty}]]></variableExpression>
+		<variableExpression><![CDATA[$F{base_price} * $F{qty}]]></variableExpression>
 	</variable>
 	<variable name="profit_1" class="java.lang.Integer" resetType="Group" resetGroup="transaction_code" calculation="Sum">
 		<variableExpression><![CDATA[$F{profit} * $F{qty}]]></variableExpression>
 	</variable>
 	<variable name="sum_profit" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{profit} * $F{qty}]]></variableExpression>
+	</variable>
+	<variable name="total_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
 	<group name="transaction_code">
 		<groupExpression><![CDATA[$F{transaction_code}]]></groupExpression>
@@ -118,7 +121,7 @@ where
 				<staticText>
 					<reportElement uuid="2a94da1f-8c59-46d2-af20-36ff8714a9c6" x="433" y="43" width="100" height="20"/>
 					<textElement/>
-					<text><![CDATA[Laba]]></text>
+					<text><![CDATA[Aset Masuk]]></text>
 				</staticText>
 				<staticText>
 					<reportElement uuid="0ed54a74-d4f3-482a-a01d-1ba37eef0b2f" x="351" y="43" width="82" height="20"/>
@@ -292,21 +295,14 @@ where
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Total Penjualan]]></text>
+				<text><![CDATA[Total Pembelian]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0">
-				<reportElement uuid="3bc08686-abbf-4c45-abb6-b97326ce9c91" x="370" y="50" width="100" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{price_1}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="ac1ae7fa-9264-4642-a2c7-0500b1966dfd" x="38" y="70" width="100" height="20"/>
+				<reportElement uuid="ac1ae7fa-9264-4642-a2c7-0500b1966dfd" x="38" y="70" width="161" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Total Barang Terjual]]></text>
+				<text><![CDATA[Total Barang Masuk]]></text>
 			</staticText>
 			<textField>
 				<reportElement uuid="b2e08ce8-8e2e-44d8-8261-2352f8c64480" x="370" y="70" width="100" height="20"/>
@@ -320,7 +316,7 @@ where
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Total Pendapatan]]></text>
+				<text><![CDATA[Total Aset Masuk]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0">
 				<reportElement uuid="26bb4b6d-787a-474a-af39-eea3b4bed5a2" x="370" y="90" width="100" height="20"/>
@@ -328,6 +324,14 @@ where
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sum_profit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0" isBlankWhenNull="false">
+				<reportElement uuid="a87b64ef-9abe-47ff-93d1-b92b3a9d6857" mode="Transparent" x="370" y="50" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
