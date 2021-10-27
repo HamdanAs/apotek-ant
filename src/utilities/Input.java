@@ -15,6 +15,8 @@ public class Input{
     public static final int LEFT = KeyEvent.VK_LEFT;
     public static final int RIGHT = KeyEvent.VK_RIGHT;
     
+    public static final int[] DOWN_KEY = new int[]{DOWN, ENTER};
+    
     public static void moveCursor(KeyEvent e, Component c, int key){
         if(e.getKeyCode() == key){
             c.requestFocus();
