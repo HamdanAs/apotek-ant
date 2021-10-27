@@ -19,5 +19,6 @@ public interface MedImp {
     public void subStock(int amount, int id);
     public void delete(int id);
     public List<Med> all();
-    public List<Med> find(String name);
+    public List<Med> find(String name);    
+    public List<Med> actualFind(String name);
 }

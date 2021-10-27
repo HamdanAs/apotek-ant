@@ -31,6 +31,7 @@ public class MedDao implements MedImp{
     final String delete = "delete from med where id = ?";
     final String all = "select * from med";
     final String find = "select * from med where name like ?";
+    final String aFind = "select * from med where name = ?";
     
     public MedDao(){
         conn = Database.connection();
@@ -168,6 +169,31 @@ public class MedDao implements MedImp{
             lm = new ArrayList<>();
             PreparedStatement stat = conn.prepareStatement(find);
             stat.setString(1, "%" + name + "%");
+            ResultSet res = stat.executeQuery();
+            while(res.next()){
+                Med m = new Med();
+                m.setId(res.getInt(1));
+                m.setName(res.getString(2));
+                m.setDesctription(res.getString(3));
+                m.setBasePrice(res.getInt(4));
+                m.setPrice(res.getInt(5));
+                m.setStock(res.getInt(6));
+                lm.add(m);
+            }
+        } catch (SQLException e){
+            System.err.println(e);
+        }
+        
+        return lm;
+    }
+    
+    @Override
+    public List<Med> actualFind(String name) {
+        List<Med> lm = null;
+        try {
+            lm = new ArrayList<>();
+            PreparedStatement stat = conn.prepareStatement(aFind);
+            stat.setString(1, name);
             ResultSet res = stat.executeQuery();
             while(res.next()){
                 Med m = new Med();

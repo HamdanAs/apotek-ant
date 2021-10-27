@@ -16,36 +16,38 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import utilities.validator.Validator;
-import views.MainFrm;
+import views.MenejemenObat;
+import views.TambahObat;
 
 /**
  *
  * @author hamdan
  */
 public class MedController {
-    MainFrm frame;
+    MenejemenObat frame;
+    TambahObat frame1;
     MedImp medImp;
     List<Med> lm;
     Table table;
     
-    public MedController(MainFrm frame){
+    public MedController(MenejemenObat frame){
         this.frame = frame;
+        medImp = new MedDao();
+        lm = medImp.all();
+        frame1 = new TambahObat();
+        
+        initTable();
+    }
+    
+    public MedController(TambahObat frame){
+        this.frame1 = frame;
+        
         medImp = new MedDao();
         lm = medImp.all();
     }
     
-    public void reset(){
-        frame.getMed_tId().setText("");
-        frame.getMed_tName().setText("");
-        frame.getMed_tDescription().setText("");
-        frame.getMed_tBasePrice().setText("");
-        frame.getMed_tPrice().setText("");
-        frame.getMed_tStock().setText("");
-        frame.getMed_tSearch().setText("");
-    }
-    
-    public void fillTable(){
-        table = new Table(frame.getMed_table());
+    private void initTable(){
+        table = new Table(frame.getTblData());
         table.setColumn(new String[]{"ID Obat", "Nama Obat", "Harga Beli", "Harga Jual", "Stock"});
         table.setColumnWidth(578, 10, 40, 20, 20, 10);
         table.textCenter(0);
@@ -53,6 +55,18 @@ public class MedController {
         table.textCenter(2);
         table.textCenter(3);
         table.textCenter(4);
+    }
+    
+    public void reset(){
+        frame1.gettId().setText("");
+        frame1.gettNama().setText("");
+        frame1.gettBeli().setText("");
+        frame1.gettJual().setText("");
+        frame1.gettDeskripsi().setText("");
+    }
+    
+    public void fillTable(){
+        table.clearRow();
         
         lm = medImp.all();
         
@@ -70,21 +84,21 @@ public class MedController {
     }
     
     public void fillField(int row){
-        frame.getMed_tId().setText(Integer.toString(lm.get(row).getId()));
-        frame.getMed_tName().setText(lm.get(row).getName());
-        frame.getMed_tStock().setText(Integer.toString(lm.get(row).getStock()));
-        frame.getMed_tDescription().setText(lm.get(row).getDesctription());
-        frame.getMed_tBasePrice().setText(Integer.toString(lm.get(row).getBasePrice()));
-        frame.getMed_tPrice().setText(Integer.toString(lm.get(row).getPrice()));
+        frame1.setOtherFrame(frame);
+        frame1.setVisible(true);
+        
+        frame1.gettId().setText(Integer.toString(lm.get(row).getId()));
+        frame1.gettNama().setText(lm.get(row).getName());
+        frame1.gettBeli().setText(Integer.toString(lm.get(row).getBasePrice()));
+        frame1.gettJual().setText(Integer.toString(lm.get(row).getPrice()));
+        frame1.gettDeskripsi().setText(lm.get(row).getDesctription());
     }
     
     public void insert(){
         HashMap<JComponent, String> rules = new HashMap<>();
-        rules.put(frame.getMed_tName(), "required");
-        rules.put(frame.getMed_tBasePrice(), "required");
-        rules.put(frame.getMed_tPrice(), "required");
-        rules.put(frame.getMed_tPrice(), "number");
-        rules.put(frame.getMed_tBasePrice(), "number");
+        rules.put(frame1.gettNama(), "required");
+        rules.put(frame1.gettBeli(), "required");
+        rules.put(frame1.gettJual(), "required");
         
         Validator validator = new Validator(rules);
         
@@ -93,7 +107,7 @@ public class MedController {
         System.out.println(Arrays.toString(validator.getIsFail()));
         
         while(validator.fails()){
-            JOptionPane.showMessageDialog(frame, validator.getErrorMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(frame1, validator.getErrorMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             
             System.out.println(validator.fails());
             
@@ -103,37 +117,35 @@ public class MedController {
         }
         
         Med m = new Med();
-        m.setName(frame.getMed_tName().getText());
-        m.setDesctription(frame.getMed_tDescription().getText());
-        m.setBasePrice(Integer.parseInt(frame.getMed_tBasePrice().getText()));
-        m.setPrice(Integer.parseInt(frame.getMed_tPrice().getText()));
+        m.setName(frame1.gettNama().getText());
+        m.setDesctription(frame1.gettDeskripsi().getText());
+        m.setBasePrice(Integer.parseInt(frame1.gettBeli().getText()));
+        m.setPrice(Integer.parseInt(frame1.gettJual().getText()));
 
-        lm = medImp.find(frame.getMed_tName().getText());
+        lm = medImp.actualFind(m.getName());
         
         if(lm.isEmpty()){
             medImp.insert(m);
 
-            JOptionPane.showMessageDialog(frame, "Data tersimpan!", "Menejemen Obat", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame1, "Data tersimpan!", "Menejemen Obat", JOptionPane.INFORMATION_MESSAGE);
 
             reset();
         } else {
-            if(lm.get(0).getName().equals(m.getName())){
-                JOptionPane.showMessageDialog(frame, "Nama obat sudah ada didalam database!", "Menejemen Obat", JOptionPane.WARNING_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(frame1, "Nama obat sudah ada didalam database!", "Menejemen Obat", JOptionPane.WARNING_MESSAGE);
         }
         
     }
     
     public void update(){
-        if(frame.getMed_tId().getText().equals("")){
+        if(frame1.gettId().getText().equals("")){
             JOptionPane.showMessageDialog(frame, "Silahkan pilih data!", "Menejemen Obat", JOptionPane.WARNING_MESSAGE);
         } else {
             Med m = new Med();
-            m.setName(frame.getMed_tName().getText());
-            m.setDesctription(frame.getMed_tDescription().getText());
-            m.setBasePrice(Integer.parseInt(frame.getMed_tBasePrice().getText()));
-            m.setPrice(Integer.parseInt(frame.getMed_tPrice().getText()));
-            m.setId(Integer.parseInt(frame.getMed_tId().getText()));
+            m.setName(frame1.gettNama().getText());
+            m.setDesctription(frame1.gettDeskripsi().getText());
+            m.setBasePrice(Integer.parseInt(frame1.gettBeli().getText()));
+            m.setPrice(Integer.parseInt(frame1.gettJual().getText()));
+            m.setId(Integer.parseInt(frame1.gettId().getText()));
 
             medImp.update(m);
 
@@ -144,9 +156,9 @@ public class MedController {
     }
     
     public void delete(){
-        if(!frame.getMed_tId().getText().trim().isEmpty()){
+        if(!frame1.gettId().getText().trim().isEmpty()){
             if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus data ini?") == JOptionPane.YES_OPTION) {
-                int id = Integer.parseInt(frame.getMed_tId().getText());
+                int id = Integer.parseInt(frame1.gettId().getText());
                 medImp.delete(id);
                 
                 reset();
@@ -157,14 +169,25 @@ public class MedController {
     }
     
     public void fillFindTable(){
-        lm = medImp.find(frame.getMed_tSearch().getText());
-        MedTable mt = new MedTable(lm);
-        frame.getMed_table().setModel(mt);
+        table.clearRow();
+        
+        lm = medImp.find(frame.gettCari().getText());
+        lm.forEach((Med m) -> {
+            Object[] o = new Object[]{
+                m.getId(),
+                m.getName(),
+                m.getBasePrice(),
+                m.getPrice(),
+                m.getStock()
+            };
+            
+            table.addRow(o);
+        });
     }
     
     public void find(){
-        if(!frame.getMed_tSearch().getText().trim().isEmpty()){
-            medImp.find(frame.getMed_tSearch().getText());
+        if(!frame.gettCari().getText().trim().isEmpty()){
+            medImp.find(frame.gettCari().getText());
             fillFindTable();
         } else {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data!");

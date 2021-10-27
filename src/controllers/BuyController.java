@@ -22,29 +22,38 @@ import utilities.InvoiceCode;
 import utilities.Table;
 import java.util.List;
 import javax.swing.JOptionPane;
-import views.MainFrm;
+import views.Pembelian;
 
 /**
  *
  * @author hamdan
  */
 public class BuyController {
-    private final MainFrm frame;
-    private final PurchaseImp pImp;
-    private final PurchDetailImp pdImp;
+    private final Pembelian frame;
+    private final PurchaseImp tImp;
+    private final PurchDetailImp tdImp;
     private final InvoiceImp iImp;
     private final MedImp mImp;
     private final Table table;
-    private List<Med> lm;
+    private List<Med> lm, ls;
     
-    public BuyController(MainFrm frame){
+    private enum State{
+        isOpen,
+        isNotOpen
+    }
+    
+    private State currentState;
+    private int changes;
+    private boolean passChanges = false;
+    
+    public BuyController(Pembelian frame){
         this.frame = frame;
-        pImp = (PurchaseImp) new PurchaseDao();
-        pdImp = (PurchDetailImp) new PurchDetailDao();
-        iImp = (InvoiceImp) new InvoiceDao();
-        mImp = (MedImp) new MedDao();
+        tImp = new PurchaseDao();
+        tdImp = new PurchDetailDao();
+        iImp = new InvoiceDao();
+        mImp = new MedDao();
         
-        table = new Table(frame.getBuy_table());
+        table = new Table(frame.getTblData());
         table.setColumn(new String[]{"ID Obat", "Nama Obat", "Harga", "Qty", "Total"});
         table.setColumnWidth(578, 10, 55, 15, 5, 15);
         table.textCenter(0);
@@ -52,115 +61,103 @@ public class BuyController {
         table.textCenter(2);
         table.textCenter(3);
         table.textCenter(4);
+        
+        currentState = State.isNotOpen;
+    }
+    
+    public void Open(){
+        currentState = State.isOpen;
     }
     
     public void savePurchase(){
-        Purchase t = new Purchase();
-        t.setDate(Date.now());
-        t.setTotal(Integer.parseInt(frame.getBuy_tTotal().getText()));
-        t.setPurchaseCode(InvoiceCode.generate("PM", "purchase"));
+        if(passChanges){
+            Purchase t = new Purchase();
+            t.setDate(Date.now());
+            t.setTotal(Integer.parseInt(frame.gettTotal().getText()));
+            t.setPurchaseCode(InvoiceCode.generate("PM", "purchase"));
 
-        pImp.insert(t);
-        
-        for (int i = 0; i < table.getRowCount(); i++){
-            PurchaseDetail td = new PurchaseDetail();
-            int medId = Integer.parseInt((String) table.getColumnValue(i, 0));
-            int qty = Integer.parseInt((String) table.getColumnValue(i, 3));
-            
-            td.setMedId(medId);
-            td.setQty(qty);
-            
-            mImp.addStock(qty, medId);
-            
-            td.setPurchaseId(t.getId());
-            
-            pdImp.insert(td);
-            
+            tImp.insert(t);
+
+            for (int i = 0; i < table.getRowCount(); i++){
+                PurchaseDetail td = new PurchaseDetail();
+                int medId = Integer.parseInt((String) table.getColumnValue(i, 0));
+                int qty = Integer.parseInt((String) table.getColumnValue(i, 3));
+
+                td.setMedId(medId);
+                td.setQty(qty);
+
+                td.setPurchaseId(t.getId());
+
+                tdImp.insert(td);
+
+                mImp.addStock(qty, medId);
+            }
+
+            Invoice i = new Invoice();
+
+            i.setDate(Date.now());
+            i.setSeq(InvoiceCode.getSequenceNum("purchase"));
+
+            iImp.insert(i, "purchase");
+
+            JOptionPane.showMessageDialog(frame, "Transaksi berhasil, Uang kembaliannya adalah " + changes, "Pembayaran berhasil", JOptionPane.INFORMATION_MESSAGE);
+            reset();
         }
-        
-        
-        Invoice i = new Invoice();
-        
-        i.setDate(Date.now());
-        i.setSeq(InvoiceCode.getSequenceNum("purchase"));
-        
-        iImp.insert(i, "purchase");
-        
-        JOptionPane.showMessageDialog(null, "Data telah tersimpan", "Pembayaran berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void reset(){
-        frame.getBuy_tName().setSelectedItem("");
-        frame.getBuy_tQty().setText("");
-        frame.getBuy_tTotal().setText("");
+        frame.gettNama().setSelectedItem("");
+        frame.gettQty().setText("");
+        frame.gettTotal().setText("");
+        frame.gettBayar().setText("");
         
         table.clearRow();
     }
     
     public void clearInput(){
-        frame.getBuy_tQty().setText("");
+        frame.gettQty().setText("");
     }
     
     public void fillCombo(){
+        frame.gettNama().removeAllItems();
         
-        lm = pImp.getMed();
-        
+        lm = tImp.getMed();
+                
         lm.forEach(lm1 -> {
-            frame.getBuy_tName().addItem(lm1.getName());
+            frame.gettNama().addItem(lm1.getName());
         });
-        
-    }
-    
-    public void getMedById(){
-        lm = pImp.getMedById(frame.getBuy_tId().getText());
-        
-        if(lm.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        
-        frame.getBuy_tStock().setText(Integer.toString(lm.get(0).getStock()));
-        frame.getBuy_tName().setSelectedItem(lm.get(0).getName());
-    }
-    
-    public void getMedByName(){
-        lm = pImp.getMedByName((String) frame.getBuy_tName().getSelectedItem());
-        
-        if(lm.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        
-        frame.getBuy_tName().setSelectedItem(lm.get(0).getName());
-        frame.getBuy_tStock().setText(Integer.toString(lm.get(0).getStock()));
-        frame.getBuy_tId().setText(Integer.toString(lm.get(0).getId()));
     }
     
     public void addRow(){
-        lm = pImp.getMedById(frame.getBuy_tId().getText());
+        lm = tImp.getMedByName((String) frame.gettNama().getSelectedItem());
         
         String[] data = new String[5];
+        
+        if(frame.gettQty().getText().equals("")){
+            JOptionPane.showMessageDialog(frame, "Qty tidak boleh kosong!", "Penjualan", JOptionPane.WARNING_MESSAGE);
+            frame.gettQty().requestFocus();
+            return;
+        }
         
         lm.forEach((lm1) -> {
             data[0] = Integer.toString(lm1.getId());
             data[1] = lm1.getName();
             data[2] = Integer.toString(lm1.getPrice());
-            data[3] = frame.getBuy_tQty().getText();
+            data[3] = frame.gettQty().getText();
             data[4] = Integer.toString(lm1.getPrice() * Integer.parseInt(data[3]));
         });
         
-        List<Med> ls = mImp.find((String) frame.getBuy_tName().getSelectedItem());
+        ls = mImp.find((String) frame.gettNama().getSelectedItem());
         
-        if(ls.get(0).getStock() < Integer.parseInt(frame.getBuy_tQty().getText())){
-            JOptionPane.showMessageDialog(frame, "Stok tidak mencukupi", "Penjualan", JOptionPane.WARNING_MESSAGE);
-            frame.getBuy_tQty().requestFocus();
-        } else {
-            table.addRow(data);
+        if(frame.gettNama().getSelectedIndex() < 0){
+            JOptionPane.showMessageDialog(frame, "Silahkan pilih data terlebih dahulu!");
         }
+        
+        table.addRow(data);
     }
     
     public void deleteRow(){
-        table.removeRow(frame.getBuy_table().getSelectedRow());
+        table.removeRow(frame.getTblData().getSelectedRow());
     }
     
     public void calculateTotal(){
@@ -171,6 +168,44 @@ public class BuyController {
             total += amount;
         }
         
-        frame.getBuy_tTotal().setText(Integer.toString(total));
+        frame.gettTotal().setText(Integer.toString(total));
+    }
+    
+    public void calculateChanges(){
+        int total = Integer.parseInt(frame.gettTotal().getText());
+        int pay = Integer.parseInt(frame.gettBayar().getText());
+        
+        if(pay <= total){
+            JOptionPane.showMessageDialog(frame, "Uang anda tidak cukup, uang yang harus dibayar adalah " + total, "Penjualan", JOptionPane.WARNING_MESSAGE);
+            passChanges = false;
+        } else {
+            setChanges(pay - total);
+            passChanges = true;
+        }
+    }
+    
+    private void setChanges(int changes){
+        this.changes = changes;
+    }
+    
+    public void getMedById(){
+        lm = tImp.getMedById(frame.gettId().getText());
+        
+        if(lm.isEmpty()){
+            JOptionPane.showMessageDialog(frame, "Data obat tidak ditemukan!", "Data Obat", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        frame.gettNama().setSelectedItem(lm.get(0).getName());
+    }
+    
+    public void getMedByName(){
+        lm = tImp.getMedByName((String) frame.gettNama().getSelectedItem());
+        
+        if(!lm.isEmpty()){
+            frame.gettNama().setSelectedItem(lm.get(0).getName());
+            frame.gettStok().setText(Integer.toString(lm.get(0).getStock()));
+            frame.gettId().setText(Integer.toString(lm.get(0).getId()));
+        }
     }
 }

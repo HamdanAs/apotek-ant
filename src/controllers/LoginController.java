@@ -9,12 +9,9 @@ import dao.LoginDao;
 import dao.interfaces.LoginImp;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import models.Login;
-import utilities.validator.Validator;
 import views.LoginFrm;
-import views.MainFrm;
+import views.MainMenu;
 
 /**
  *
@@ -39,13 +36,13 @@ public class LoginController {
         if(list.isEmpty()){
             JOptionPane.showMessageDialog(null, "Login Gagal! Silahkan masukan data yang benar!", "Login gagal", JOptionPane.WARNING_MESSAGE);
         } else {
-            MainFrm mainFrm = new MainFrm();
-            mainFrm.setVisible(true);
-            mainFrm.changeUsername(username);
-            mainFrm.setUsername(username);
-            mainFrm.setId(list.get(0).getId());
-            mainFrm.setLevel(list.get(0).getLevel());
-            mainFrm.checkLevel();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.setVisible(true);
+//            mainFrm.changeUsername(username);
+//            mainFrm.setUsername(username);
+//            mainFrm.setId(list.get(0).getId());
+//            mainFrm.setLevel(list.get(0).getLevel());
+//            mainFrm.checkLevel();
             frame.dispose();
         }
     }
