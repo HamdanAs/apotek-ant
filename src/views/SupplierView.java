@@ -5,6 +5,7 @@
  */
 package views;
 
+import controllers.SupplierController;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -16,14 +17,19 @@ import utilities.Input;
  *
  * @author Gawrgura
  */
-public class Supplier extends javax.swing.JFrame {
+public class SupplierView extends javax.swing.JFrame {
 
     /**
      * Creates new form Supplier
      */
     
-    public Supplier() {
+    SupplierController controller;
+    
+    public SupplierView() {
         initComponents();
+        
+        controller  = new SupplierController(this);
+        controller.fillTable();
         
         if(tId.getText().equals(""))
             btnDelete.setEnabled(false);
@@ -104,12 +110,16 @@ public class Supplier extends javax.swing.JFrame {
         tName = new javax.swing.JTextField();
         btnAdd = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        btnDelete = new javax.swing.JPanel();
+        btnReset = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         tId = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
+        btnRefresh = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -173,7 +183,7 @@ public class Supplier extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Cari Supplier");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 102, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 102, -1));
 
         tContact.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         tContact.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -231,7 +241,12 @@ public class Supplier extends javax.swing.JFrame {
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 219, 76));
 
         tSearch.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        jPanel3.add(tSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 220, -1));
+        tSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tSearchKeyPressed(evt);
+            }
+        });
+        jPanel3.add(tSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 180, -1));
 
         tCity.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         tCity.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -303,10 +318,86 @@ public class Supplier extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Tambah");
+        jLabel12.setText("Simpan");
         btnAdd.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
         jPanel3.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 90, -1));
+
+        btnReset.setBackground(new java.awt.Color(255, 176, 133));
+        btnReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReset.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnResetFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnResetFocusLost(evt);
+            }
+        });
+        btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetMouseClicked(evt);
+            }
+        });
+        btnReset.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnResetKeyPressed(evt);
+            }
+        });
+        btnReset.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Reset");
+        btnReset.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
+
+        jPanel3.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 90, -1));
+
+        tId.setEditable(false);
+        tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jPanel3.add(tId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 50, -1));
+
+        jLabel9.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setText("ID Supplier");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 102, -1));
+
+        tblData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDataMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblData);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 320, 360));
+
+        btnRefresh.setBackground(new java.awt.Color(255, 176, 133));
+        btnRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRefreshMouseClicked(evt);
+            }
+        });
+        btnRefresh.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/refresh-2-16.png"))); // NOI18N
+        btnRefresh.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        jPanel3.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 30, -1));
 
         btnDelete.setBackground(new java.awt.Color(255, 176, 133));
         btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -330,37 +421,13 @@ public class Supplier extends javax.swing.JFrame {
         });
         btnDelete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Hapus");
-        btnDelete.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
+        jLabel15.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Hapus");
+        btnDelete.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
 
         jPanel3.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 90, -1));
-
-        tId.setEditable(false);
-        tId.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
-        jPanel3.add(tId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 50, -1));
-
-        jLabel9.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("ID Supplier");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 102, -1));
-
-        tblData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tblData);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 320, 360));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 710, 460));
 
@@ -393,16 +460,23 @@ public class Supplier extends javax.swing.JFrame {
     }//GEN-LAST:event_tAddressKeyPressed
 
     private void tAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tAddressKeyReleased
-
+        
     }//GEN-LAST:event_tAddressKeyReleased
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
+        if(tId.getText().equals("")){
+            controller.insert();
+        } else {
+            controller.update();
+        }
+        
+        controller.reset();
+        controller.fillTable();
     }//GEN-LAST:event_btnAddMouseClicked
 
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        System.out.println("Hello");
-    }//GEN-LAST:event_btnDeleteMouseClicked
+    private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
+        controller.reset();
+    }//GEN-LAST:event_btnResetMouseClicked
 
     private void tNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNameKeyPressed
         Input.moveCursor(evt, tAddress, Input.DOWN_KEY);
@@ -441,6 +515,67 @@ public class Supplier extends javax.swing.JFrame {
         Colors.changeBg(btnAdd, Colors.BUTTON_COLOR);
     }//GEN-LAST:event_btnAddFocusLost
 
+    private void btnResetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnResetFocusGained
+        Colors.changeBg(btnReset, Colors.HOVER_COLOR);
+    }//GEN-LAST:event_btnResetFocusGained
+
+    private void btnResetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnResetFocusLost
+        Colors.changeBg(btnReset, Colors.BUTTON_COLOR);
+    }//GEN-LAST:event_btnResetFocusLost
+
+    private void btnAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAddKeyPressed
+        Input.moveCursor(evt, tContact, Input.UP);
+        Input.moveCursor(evt, btnReset, Input.LEFT);
+        Input.executeAction(evt, Input.RIGHT, () -> {
+            if(btnDelete.isEnabled()){
+                btnDelete.requestFocus();
+            } else {
+                btnReset.requestFocus();
+            }
+        });
+        
+        Input.executeAction(evt, Input.ENTER, () -> {
+            btnAddMouseClicked(null);
+            tName.requestFocus();
+        });
+    }//GEN-LAST:event_btnAddKeyPressed
+
+    private void btnResetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnResetKeyPressed
+        Input.moveCursor(evt, tContact, Input.UP);
+        Input.moveCursor(evt, btnAdd, Input.RIGHT);
+        
+        Input.executeAction(evt, Input.LEFT, () -> {
+            if(btnDelete.isEnabled()){
+                btnDelete.requestFocus();
+            } else {
+                btnAdd.requestFocus();
+            }
+        });
+        
+        Input.executeAction(evt, Input.ENTER, () -> {
+            btnDeleteMouseClicked(null);
+            tName.requestFocus();
+        });
+    }//GEN-LAST:event_btnResetKeyPressed
+
+    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
+        controller.fillField(tblData.getSelectedRow());
+        btnDelete.setEnabled(true);
+    }//GEN-LAST:event_tblDataMouseClicked
+
+    private void btnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshMouseClicked
+        controller.fillTable();
+        controller.reset();
+        tSearch.setText("");
+        btnDelete.setEnabled(false);
+    }//GEN-LAST:event_btnRefreshMouseClicked
+
+    private void tSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tSearchKeyPressed
+        Input.executeAction(evt, Input.ENTER, () -> {
+            controller.fillFindTable();
+        });
+    }//GEN-LAST:event_tSearchKeyPressed
+
     private void btnDeleteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnDeleteFocusGained
         Colors.changeBg(btnDelete, Colors.HOVER_COLOR);
     }//GEN-LAST:event_btnDeleteFocusGained
@@ -449,19 +584,22 @@ public class Supplier extends javax.swing.JFrame {
         Colors.changeBg(btnDelete, Colors.BUTTON_COLOR);
     }//GEN-LAST:event_btnDeleteFocusLost
 
-    private void btnAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAddKeyPressed
-        Input.moveCursor(evt, tContact, Input.UP);
-        Input.executeAction(evt, Input.RIGHT, () -> {
-            if(btnDelete.isEnabled()){
-                btnDelete.requestFocus();
-            }
-        });
-    }//GEN-LAST:event_btnAddKeyPressed
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        if(btnDelete.isEnabled()){
+            controller.delete();
+            controller.fillTable();
+            controller.reset();            
+        }
+    }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnDeleteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDeleteKeyPressed
-        
         Input.moveCursor(evt, tContact, Input.UP);
         Input.moveCursor(evt, btnAdd, Input.LEFT);
+        
+        Input.executeAction(evt, Input.ENTER, () -> {
+            btnDeleteMouseClicked(null);
+            tName.requestFocus();
+        });
     }//GEN-LAST:event_btnDeleteKeyPressed
 
     /**
@@ -481,20 +619,21 @@ public class Supplier extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Supplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SupplierView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Supplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SupplierView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Supplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SupplierView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Supplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SupplierView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Supplier().setVisible(true);
+                new SupplierView().setVisible(true);
             }
         });
     }
@@ -502,11 +641,15 @@ public class Supplier extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAdd;
     private javax.swing.JPanel btnDelete;
+    private javax.swing.JPanel btnRefresh;
+    private javax.swing.JPanel btnReset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
