@@ -78,6 +78,8 @@ public class SellController {
 
             tImp.insert(t);
 
+            System.out.println(t.getId());
+            
             for (int i = 0; i < table.getRowCount(); i++){
                 TransactionDetail td = new TransactionDetail();
                 int medId = Integer.parseInt((String) table.getColumnValue(i, 0));

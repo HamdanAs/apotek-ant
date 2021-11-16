@@ -13,9 +13,11 @@ import models.Med;
 import models.tables.MedTable;
 import utilities.Table;
 import java.util.List;
+import java.util.StringTokenizer;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import utilities.validator.Validator;
+import views.CariObat;
 import views.MenejemenObat;
 import views.TambahObat;
 
@@ -26,6 +28,7 @@ import views.TambahObat;
 public class MedController {
     MenejemenObat frame;
     TambahObat frame1;
+    CariObat frame2;
     MedImp medImp;
     List<Med> lm;
     Table table;
@@ -41,6 +44,13 @@ public class MedController {
     
     public MedController(TambahObat frame){
         this.frame1 = frame;
+        
+        medImp = new MedDao();
+        lm = medImp.all();
+    }
+    
+    public MedController(CariObat frame){
+        this.frame2 = frame;
         
         medImp = new MedDao();
         lm = medImp.all();
@@ -81,6 +91,50 @@ public class MedController {
             
             table.addRow(o);
         });
+    }
+    
+    public void fillList(){
+        String name = frame2.gettCari().getText();
+        
+        lm = medImp.find(name);
+        String[] items = new String[lm.size()];
+        
+        for(int i = 0; i < lm.size(); i++){
+            items[i] = Integer.toString(lm.get(i).getId()) + " - " +lm.get(i).getName();
+        }
+        
+        frame2.getListObat().setListData(items);
+    }
+    
+    public void initList(){
+        lm = medImp.all();
+        
+        String[] items = new String[lm.size()];
+        
+        for(int i = 0; i < lm.size(); i++){
+            items[i] = Integer.toString(lm.get(i).getId()) + " - " +lm.get(i).getName();
+        }
+        
+        frame2.getListObat().setListData(items);
+    }
+    
+    public String getIdFromList(){
+        String item = frame2.getListObat().getSelectedValue();
+        
+        StringTokenizer st = new StringTokenizer(item, " - ");
+        String id = st.nextToken();
+        
+        return id;
+    }
+    
+    public String getNameFromList(){
+        String item = frame2.getListObat().getSelectedValue();
+        
+        StringTokenizer st = new StringTokenizer(item, " - ");
+        
+        st.nextElement();
+        
+        return (String) st.nextElement();
     }
     
     public void fillField(int row){

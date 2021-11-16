@@ -24,7 +24,7 @@ import java.util.List;
 public class PurchaseDao implements PurchaseImp{
     Connection conn;
     
-    final String insert = "insert into purchases values (null, ?,?,?)";
+    final String insert = "insert into purchases values (null, ?,?,?,?)";
     final String all = "select * from purchases";
     final String med = "select * from med";
     final String medByName = "select * from med where name like ?";
@@ -40,8 +40,9 @@ public class PurchaseDao implements PurchaseImp{
         try {
             stat = conn.prepareStatement(insert, PreparedStatement.RETURN_GENERATED_KEYS);
             stat.setString(1, t.getDate());
-            stat.setInt(2, t.getTotal());
-            stat.setString(3, t.getPurchaseCode());
+            stat.setInt(2, t.getSupplierId());
+            stat.setInt(3, t.getTotal());
+            stat.setString(4, t.getPurchaseCode());
             stat.executeUpdate();
             
             ResultSet rs = stat.getGeneratedKeys();

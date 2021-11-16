@@ -12,6 +12,7 @@ package models;
 public class Purchase {
     private Integer Id;
     private String date;
+    private Integer supplierId;
     private Integer total;
     private String purchaseCode;
 
@@ -46,6 +47,12 @@ public class Purchase {
     public void setPurchaseCode(String purchaseCode) {
         this.purchaseCode = purchaseCode;
     }
-    
-    
+
+    public Integer getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
+    }
 }
