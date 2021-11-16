@@ -28,6 +28,7 @@ public class Pembelian extends javax.swing.JFrame implements KeyListener{
     
     MainMenu frm;
     BuyController controller;
+    CariObat cariObat;
     public Pembelian() {
         initComponents();
         controller = new BuyController(this);
@@ -37,6 +38,8 @@ public class Pembelian extends javax.swing.JFrame implements KeyListener{
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         controller.fillSupplierCombo();
+        
+        cariObat = new CariObat();
     }
 
     public JTextField gettBayar() {
@@ -89,7 +92,6 @@ public class Pembelian extends javax.swing.JFrame implements KeyListener{
     
     private void registerFunctionKey(KeyEvent e){
         Input.executeAction(e, KeyEvent.VK_F5, () -> {
-            CariObat cariObat = new CariObat();
             cariObat.setOtherFrame(this);
             cariObat.setVisible(true);
         });
@@ -489,6 +491,7 @@ public class Pembelian extends javax.swing.JFrame implements KeyListener{
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         this.dispose();
+        cariObat.dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private int x, y;
@@ -506,7 +509,6 @@ public class Pembelian extends javax.swing.JFrame implements KeyListener{
 
     private void btnTambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTambahMouseClicked
         controller.addRow();
-        controller.clearInput();
         controller.calculateTotal();
     }//GEN-LAST:event_btnTambahMouseClicked
 
@@ -543,7 +545,6 @@ public class Pembelian extends javax.swing.JFrame implements KeyListener{
         Input.executeAction(evt, Input.ENTER, () -> {
             controller.addRow();
             controller.calculateTotal();
-            controller.clearInput();
             tNama.requestFocus();
         });
     }//GEN-LAST:event_tQtyKeyPressed

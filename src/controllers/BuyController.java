@@ -62,8 +62,17 @@ public class BuyController {
         iImp = new InvoiceDao();
         mImp = new MedDao();
         sImp = new SupplierDao();
-        
         table = new Table(frame.getTblData());
+        
+        initTable();
+        
+        currentState = State.isNotOpen;
+        
+        frame.gettTanggal().setText(Date.now());
+        frame.gettKode().setText(InvoiceCode.generate("PM", "purchase"));
+    }
+    
+    private void initTable(){
         table.setColumn(new String[]{"ID Obat", "Nama Obat", "Harga Beli", "Harga Jual", "Qty", "Total"});
         table.setColumnWidth(578, 10, 55, 15, 15, 5, 15);
         table.textCenter(0);
@@ -71,11 +80,7 @@ public class BuyController {
         table.textCenter(2);
         table.textCenter(3);
         table.textCenter(4);
-        
-        currentState = State.isNotOpen;
-        
-        frame.gettTanggal().setText(Date.now());
-        frame.gettKode().setText(InvoiceCode.generate("PM", "purchase"));
+        table.textCenter(5);
     }
     
     public void Open(){
@@ -98,7 +103,7 @@ public class BuyController {
             for (int i = 0; i < table.getRowCount(); i++){
                 PurchaseDetail td = new PurchaseDetail();
                 int medId = Integer.parseInt((String) table.getColumnValue(i, 0));
-                int qty = Integer.parseInt((String) table.getColumnValue(i, 5));
+                int qty = Integer.parseInt((String) table.getColumnValue(i, 4));
 
                 td.setMedId(medId);
                 td.setQty(qty);
@@ -124,8 +129,9 @@ public class BuyController {
     public void reset(){
         frame.gettNama().setText("");
         frame.gettQty().setText("");
-        frame.gettTotal().setText("Rp. " + 0);
+        frame.gettTotal().setText("Rp. 0,00");
         frame.gettBayar().setText("");
+        frame.gettKode().setText(InvoiceCode.generate("PM", "purchase"));
         
         table.clearRow();
     }
@@ -153,8 +159,13 @@ public class BuyController {
         
         String[] data = new String[6];
         
+        if(frame.gettId().getText().equals("")){
+            JOptionPane.showMessageDialog(frame, "Data obat tidak boleh kosong!", "Pembelian", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if(frame.gettQty().getText().equals("")){
-            JOptionPane.showMessageDialog(frame, "Qty tidak boleh kosong!", "Penjualan", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Qty tidak boleh kosong!", "Pembelian", JOptionPane.WARNING_MESSAGE);
             frame.gettQty().requestFocus();
             return;
         }
@@ -173,6 +184,8 @@ public class BuyController {
         }
         
         table.addRow(data);
+        
+        clearInput();
     }
     
     public void deleteRow(){
@@ -197,7 +210,7 @@ public class BuyController {
         int total = (int) chargeTotal;
         int pay = Integer.parseInt(frame.gettBayar().getText());
         
-        if(pay <= total){
+        if(pay < total){
             JOptionPane.showMessageDialog(frame, "Uang anda tidak cukup, uang yang harus dibayar adalah " + total, "Penjualan", JOptionPane.WARNING_MESSAGE);
             passChanges = false;
         } else {

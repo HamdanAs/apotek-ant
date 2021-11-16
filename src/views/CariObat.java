@@ -24,6 +24,7 @@ public class CariObat extends javax.swing.JFrame {
     
     MedController controller;
     Pembelian framePembelian;
+    Penjualan framePenjualan;
     
     public CariObat() {
         initComponents();
@@ -43,6 +44,10 @@ public class CariObat extends javax.swing.JFrame {
     
     public void setOtherFrame(Pembelian frm){
         this.framePembelian = frm;
+    }
+    
+    public void setOtherFrame(Penjualan frm){
+        this.framePenjualan = frm;
     }
     
     private void registerFunctionKey(java.awt.event.KeyEvent e){
@@ -163,6 +168,12 @@ public class CariObat extends javax.swing.JFrame {
             framePembelian.gettId().setText(controller.getIdFromList());
             framePembelian.controller.getMedById();
             framePembelian.gettQty().requestFocus();
+    //            System.out.println(controller.getNameFromList());
+            this.dispose();
+        } else if(framePenjualan != null){
+            framePenjualan.gettId().setText(controller.getIdFromList());
+            framePenjualan.controller.getMedById();
+            framePenjualan.gettQty().requestFocus();
     //            System.out.println(controller.getNameFromList());
             this.dispose();
         }
