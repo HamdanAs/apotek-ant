@@ -1,47 +1,96 @@
 package controllers;
 
-//import dao.ReportDao;
-//import dao.interfaces.ReportImp;
-//import database.Database;
-//import java.sql.Connection;
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Locale;
-//import javax.swing.JOptionPane;
-//import net.sf.jasperreports.engine.JRException;
-//import net.sf.jasperreports.engine.JRParameter;
-//import net.sf.jasperreports.engine.JasperCompileManager;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.view.JasperViewer;
-//import views.MainFrm;
-//
-//
-///**
-// *
-// * @author NESAS
-// */
-//public class ReportController {
-//    
-//    private final MainFrm frame;
-//    private final ReportImp reportImp;
-//    private final Connection conn;
-//    private List<String> listSell;
-//    private final Locale id;
-//    
-//    public ReportController(MainFrm frame){
-//        this.frame = frame;
-//        this.conn = Database.connection();
-//        
-//        reportImp = new ReportDao();
-//        
-//        id = new Locale("in", "ID");
-//    }
-//    
+import builder.ReportBuilder;
+import builder.initializer.ReportInitializer;
+import builder.report.Report;
+import dao.ReportDao;
+import dao.interfaces.ReportImp;
+import database.Database;
+import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import views.Laporan;
+
+
+/**
+ *
+ * @author NESAS
+ */
+public class ReportController {
+    
+    private enum ReportType{
+        buy,
+        sell
+    }
+    
+    private final Laporan frame;
+    private final ReportImp reportImp;
+    private final Connection conn;
+    private List<String> listSell;
+    private final Locale id;
+    
+    private final ReportBuilder builder;
+    private final ReportInitializer buyReport;
+    private final ReportInitializer sellReport;
+    
+    private ReportType reportType;
+    
+    public ReportController(Laporan frame){
+        this.frame = frame;
+        this.conn = Database.connection();
+        
+        reportImp = new ReportDao();
+        
+        id = new Locale("in", "ID");
+        
+        builder = ReportBuilder.getInstance();
+        buyReport = builder.prepareBuyReport();
+        sellReport = builder.prepareSellReport();
+    }
+    
+    public void setReportName(){
+       
+        buyReport.getReportName().forEach((report) -> {
+            frame.gettNama().addItem(report);
+        });
+        
+        sellReport.getReportName().forEach((report) -> {
+            frame.gettNama().addItem(report);
+        });
+    }
+    
+    public void setReport(){
+        String reportName = (String) frame.gettNama().getSelectedItem();
+        
+        reportType = ReportType.buy;
+        
+        switch (reportType){
+            case buy:
+                for(Report report : buyReport.getReport()){
+                    if(reportName.equals(report.name())){
+                        System.out.println(report.type());
+                        return;
+                    }
+                }
+                
+                break;
+            default:
+                break;
+        }
+    }
+    
 //    public void setSellDate(){
 //        listSell = reportImp.loadDateSell();
 //        
@@ -241,4 +290,4 @@ package controllers;
 //            System.err.println(e);
 //        }
 //    }
-//}
+}
