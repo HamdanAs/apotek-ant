@@ -123,6 +123,7 @@ public class Laporan extends javax.swing.JFrame {
 
         tTanggal.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         tTanggal.setForeground(new java.awt.Color(102, 102, 102));
+        tTanggal.setEnabled(false);
         tTanggal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tTanggalActionPerformed(evt);
@@ -131,6 +132,7 @@ public class Laporan extends javax.swing.JFrame {
 
         tTahun.setFont(new java.awt.Font("Poppins Light", 1, 12)); // NOI18N
         tTahun.setForeground(new java.awt.Color(102, 102, 102));
+        tTahun.setEnabled(false);
 
         btnSimpan.setBackground(new java.awt.Color(255, 176, 133));
         btnSimpan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,7 +193,7 @@ public class Laporan extends javax.swing.JFrame {
     }//GEN-LAST:event_tTanggalActionPerformed
 
     private void tNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNamaActionPerformed
-        controller.setReport();
+        controller.updateReport();
     }//GEN-LAST:event_tNamaActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked

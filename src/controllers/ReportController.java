@@ -61,97 +61,168 @@ public class ReportController {
     }
     
     public void setReportName(){
-       
+        frame.gettNama().addItem("-- Pilih Laporan --");
+        
         buyReport.getReportName().forEach((report) -> {
             frame.gettNama().addItem(report);
         });
-        
+
         sellReport.getReportName().forEach((report) -> {
             frame.gettNama().addItem(report);
         });
     }
     
-    public void setReport(){
+    public void updateReport(){
         String reportName = (String) frame.gettNama().getSelectedItem();
         
-        reportType = ReportType.buy;
+        checkType(reportName);
         
-        switch (reportType){
-            case buy:
-                for(Report report : buyReport.getReport()){
-                    if(reportName.equals(report.name())){
-                        System.out.println(report.type());
-                        return;
-                    }
-                }
-                
-                break;
-            default:
-                break;
+        if(frame.gettNama().getSelectedIndex() == 0){
+            resetCombobox();
+        }
+        
+        if(reportType != null){
+            switch (reportType){
+                case buy:
+                    setReport(reportName, buyReport);
+                    break;
+                case sell:
+                    setReport(reportName, sellReport);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     
-//    public void setSellDate(){
-//        listSell = reportImp.loadDateSell();
-//        
-//        frame.getReport_SellDate().addItem("Pilih tanggal");
-//        
-//        listSell.forEach((list) -> {
-//            frame.getReport_SellDate().addItem(list);
-//        });
-//    }
-//    
-//    public void setSellMonth(){
-//        listSell = reportImp.loadMonthSell();
-//        
-//        frame.getReport_SellMonth().addItem("Pilih bulan");
-//        
-//        listSell.forEach((list) -> {
-//            frame.getReport_SellMonth().addItem(list);
-//        });
-//    }
-//    
-//    public void setSellYear(){
-//        listSell = reportImp.loadYearSell();
-//        
-//        frame.getReport_SellYear().addItem("Pilih tahun");
-//        
-//        listSell.forEach((list) -> {
-//            frame.getReport_SellYear().addItem(list);
-//            frame.getReport_SellMonth1().addItem(list);
-//        });
-//    }
-//    
-//    public void setBuyDate(){
-//        listSell = reportImp.loadDateBuy();
-//        
-//        frame.getReport_BuyDate().addItem("Pilih tanggal");
-//        
-//        listSell.forEach((list) -> {
-//            frame.getReport_BuyDate().addItem(list);
-//        });
-//    }
-//    
-//    public void setBuyMonth(){
-//        listSell = reportImp.loadMonthBuy();
-//        
-//        frame.getReport_BuyMonth().addItem("Pilih bulan");
-//        
-//        listSell.forEach((list) -> {
-//            frame.getReport_BuyMonth().addItem(list);
-//        });
-//    }
-//    
-//    public void setBuyYear(){
-//        listSell = reportImp.loadYearBuy();
-//        
-//        frame.getReport_BuyYear().addItem("Pilih tahun");
-//        
-//        listSell.forEach((list) -> {
-//            frame.getReport_BuyYear().addItem(list);
-//            frame.getReport_BuyMonth1().addItem(list);
-//        });
-//    }
+    public void setSellDate(){
+        frame.gettTanggal().setEnabled(true);
+        
+        listSell = reportImp.loadDateSell();
+        
+        frame.gettTanggal().addItem("Pilih tanggal");
+        
+        listSell.forEach(frame.gettTanggal()::addItem);
+    }
+    
+    public void setSellMonth(){
+        frame.gettTanggal().setEnabled(true);
+        
+        listSell = reportImp.loadMonthSell();
+        
+        frame.gettTanggal().addItem("Pilih bulan");
+        
+        listSell.forEach(frame.gettTanggal()::addItem);
+    }
+    
+    public void setSellYear(){
+        frame.gettTahun().setEnabled(true);
+        
+        listSell = reportImp.loadYearSell();
+        
+        frame.gettTahun().addItem("Pilih tahun");
+        
+        listSell.forEach(frame.gettTahun()::addItem);
+    }
+    
+    public void setBuyDate(){
+        frame.gettTanggal().setEnabled(true);
+        
+        listSell = reportImp.loadDateBuy();
+        
+        frame.gettTanggal().addItem("Pilih tanggal");
+        
+        listSell.forEach(frame.gettTanggal()::addItem);
+    }
+    
+    public void setBuyMonth(){
+        frame.gettTanggal().setEnabled(true);
+        
+        listSell = reportImp.loadMonthBuy();
+        
+        frame.gettTanggal().addItem("Pilih bulan");
+        
+        listSell.forEach(frame.gettTanggal()::addItem);
+    }
+    
+    public void setBuyYear(){
+        frame.gettTahun().setEnabled(true);
+        
+        listSell = reportImp.loadYearBuy();
+        
+        frame.gettTahun().addItem("Pilih tahun");
+        
+        listSell.forEach((list) -> {
+            frame.gettTahun().addItem(list);
+        });
+    }
+    
+    public void showReport(){
+        if(frame.gettNama().getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Silahkan pilih laporan!", "Laporan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                
+                String date = frame.gettTanggal().getSelectedItem().toString();
+                Date newDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                
+                String jrxmlFile = "src/reports/laporan_detail_penjualan_harian.jrxml";
+                HashMap param = new HashMap();
+                param.put(JRParameter.REPORT_LOCALE, id);
+                param.put("imageDir", Report.PATH);
+                param.put("date", newDate);
+                
+                JasperReport jr = JasperCompileManager.compileReport(jrxmlFile);
+                JasperPrint print = JasperFillManager.fillReport(jr, param, conn);
+                JasperViewer.viewReport(print, false);
+            } catch (JRException | ParseException e){
+                System.err.println(e);
+            }
+        }
+    }
+    
+    private void checkType(String reportName){
+        reportName = reportName.toLowerCase();
+        
+        if(reportName.contains("penjualan")){
+            reportType = ReportType.sell;
+        } else if(reportName.contains("pembelian")){
+            reportType = ReportType.buy;
+        }
+    }
+    
+    private void resetCombobox(){
+        frame.gettTanggal().removeAllItems();
+        frame.gettTahun().removeAllItems();
+        frame.gettTahun().setEnabled(false);
+        frame.gettTanggal().setEnabled(false);
+    }
+    
+    private void setReport(String reportName, ReportInitializer init){
+        for(Report report : init.getReport()){
+            if(reportName.equals(report.name())){
+                resetCombobox();
+
+                switch(report.type()){
+                    case "daily":
+                        setBuyDate();
+                        break;
+                    case "monthly":
+                        setBuyMonth();
+                        setBuyYear();
+                        break;
+                    case "yearly":
+                        setBuyYear();
+                        break;
+                    default:
+                        resetCombobox();
+                        break;
+                }
+
+                return;
+            }
+        }
+    }
 //    
 //    public void getSellDailyReport(){
 //        if(frame.getReport_SellDate().getSelectedIndex() == 0){
